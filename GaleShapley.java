@@ -49,9 +49,12 @@ public class GaleShapley {
 				Person man = men[i];
 						
 				if(man.currentFiance == null) {
+					
+					man.nextChoice++;
+					
 					/* propose to the next choice */
 					
-					Woman nextChoiceWoman = new Woman("", -1); // blank Woman object
+					Woman nextChoiceWoman = null; // blank Woman object
 					
 					for(int j = 0; j < women.length; j++) {
 						if(women[j].id == man.prefsList[man.nextChoice]) {
