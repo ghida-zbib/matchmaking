@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,8 +71,10 @@ public class GaleShapley {
 		}
 	}
 	
-	public static void displayFromFile() {
-		
+	public static void displayFromFile() throws FileNotFoundException {
+		BufferedReader inReader = new BufferedReader(new FileReader("matches.in"));
+		char[] input;
+		/* read into here later */
 	}
 	
 	public static void main(String[] args) {
