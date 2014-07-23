@@ -6,8 +6,13 @@ public class Person {
 	protected int nextChoice;
 	protected int id;
 	
-	public Person(String name) {
+	public Person(String name, int id) {
 		this.name = name;
+		this.id = id;
 		nextChoice = 0;
+	}
+	
+	public void setPrefsList(int[] prefs) {
+		this.prefsList = prefs;
 	}
 }
