@@ -9,18 +9,24 @@ public class GaleShapley {
 		Woman woman2 = new Woman("Beta", 2);
 		Woman woman3 = new Woman("Gamma", 3);
 		Woman woman4 = new Woman ("Delta", 4);
+		Woman woman5 = new Woman ("Epsilon", 5);
+		Woman woman6 = new Woman ("Omega", 6);
 		
-		int[] woman1Prefs = {4, 1, 2, 3};
-		int[] woman2Prefs = {2, 4, 3, 1};
-		int[] woman3Prefs = {4, 2, 1, 3};
-		int[] woman4Prefs = {1, 2, 3, 4};
+		int[] woman1Prefs = {5, 4, 1, 2, 3, 6};
+		int[] woman2Prefs = {6, 5, 2, 4, 3, 1};
+		int[] woman3Prefs = {4, 6, 2, 1, 5, 3};
+		int[] woman4Prefs = {1, 2, 3, 6, 5, 4};
+		int[] woman5Prefs = {3, 4, 5, 6, 2, 1};
+		int[] woman6Prefs = {1, 6, 4, 3, 2, 5};
 		
 		woman1.setPrefsList(woman1Prefs);
 		woman2.setPrefsList(woman2Prefs);
 		woman3.setPrefsList(woman3Prefs);
 		woman4.setPrefsList(woman4Prefs);
+		woman5.setPrefsList(woman5Prefs);
+		woman6.setPrefsList(woman6Prefs);
 		
-		Woman[] women = {woman1, woman2, woman3, woman4};
+		Woman[] women = {woman1, woman2, woman3, woman4, woman5, woman6};
 		return women;
 	}
 	
@@ -29,25 +35,31 @@ public class GaleShapley {
 		Person man2 = new Person("B", 2);
 		Person man3 = new Person("C", 3);
 		Person man4 = new Person ("D", 4);
+		Person man5= new Person ("E", 5);
+		Person man6= new Person ("F", 6);
 		
-		int[] man1Prefs = {3, 4, 2, 1}; // these are the IDs of his preferences, in order
-		int[] man2Prefs = {2, 3, 4, 1};
-		int[] man3Prefs = {2, 1, 4, 3};
-		int[] man4Prefs = {1, 2, 3, 4};
+		int[] man1Prefs = {3, 4, 2, 5, 1, 6}; // these are the IDs of his preferences, in order
+		int[] man2Prefs = {2, 6, 3, 4, 5, 1};
+		int[] man3Prefs = {5, 2, 1, 4, 3, 6};
+		int[] man4Prefs = {1, 2, 3, 4, 5, 6};
+		int[] man5Prefs = {5, 6, 1, 2, 3, 4};
+		int[] man6Prefs = {2, 4, 1, 5, 6, 3};
 		
 		man1.setPrefsList(man1Prefs);
 		man2.setPrefsList(man2Prefs);
 		man3.setPrefsList(man3Prefs);
 		man4.setPrefsList(man4Prefs);
+		man5.setPrefsList(man5Prefs);
+		man6.setPrefsList(man6Prefs);
 		
-		Person[] men = {man1, man2, man3, man4};
+		Person[] men = {man1, man2, man3, man4, man5, man6};
 		return men;
 	}
 	
 	public static void displayFromManual() {
 		Person[] men = manualMenInput();
 		Woman[] women = manualWomenInput();
-		List<List<Person>> galeShapleyOutput = galeShapley(men, women, 4);
+		List<List<Person>> galeShapleyOutput = galeShapley(men, women, 6);
 		for(int i = 0; i < galeShapleyOutput.size(); i++) {
 			List<Person> matchRow = galeShapleyOutput.get(i);
 			System.out.println(matchRow.get(0).name + " is matched with " + matchRow.get(1).name);
