@@ -1,21 +1,46 @@
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class GaleShapley {
 	
 	public static void main(String[] args) {
 		
-		Person man1 = new Person("Joe");
-		Person man2 = new Person("Mark");
-		Person man3 = new Person("Amit");
+		Person man1 = new Person("Joe", 1);
+		Person man2 = new Person("Mark", 2);
+		Person man3 = new Person("Amit", 3);
 		
-		Woman woman1 = new Woman("Alpha");
-		Woman woman2 = new Woman("Beta");
-		Woman woman3 = new Woman("Gamma");
-	
+		int[] man1Prefs = {3, 2, 1}; // these are the IDs of his preferences, in order
+		int[] man2Prefs = {2, 3, 1};
+		int[] man3Prefs = {2, 1, 3};
+		
+		man1.setPrefsList(man1Prefs);
+		man2.setPrefsList(man2Prefs);
+		man3.setPrefsList(man3Prefs);
+		
+		Woman woman1 = new Woman("Alpha", 1);
+		Woman woman2 = new Woman("Beta", 2);
+		Woman woman3 = new Woman("Gamma", 3);
+		
+		int[] woman1Prefs = {1, 2, 3};
+		int[] woman2Prefs = {2, 3, 1};
+		int[] woman3Prefs = {2, 1, 3};
+		
+		woman1.setPrefsList(woman1Prefs);
+		woman2.setPrefsList(woman2Prefs);
+		woman3.setPrefsList(woman3Prefs);
+		
+		Person[] men = {man1, man2, man3};
+		Woman[] women = {woman1, woman2, woman3};
+		
+		List<List<Person>> galeShapleyOutput = galeShapley(men, women, 3);
+		for(int i = 0; i < galeShapleyOutput.size(); i++) {
+			List<Person> matchRow = galeShapleyOutput.get(i);
+			System.out.println(matchRow.get(0).name + " is matched with " + matchRow.get(1).name);
+		}
 	}
 	
-	public static Person[][] galeShapley(Person[] men, Woman[] women, int n) {
+	public static List<List<Person>> galeShapley(Person[] men, Woman[] women, int n) {
 		int engagedCount = 0;
 		
 		while(engagedCount < n) {
@@ -26,7 +51,7 @@ public class GaleShapley {
 				if(man.currentFiance == null) {
 					/* propose to the next choice */
 					
-					Woman nextChoiceWoman = new Woman("");
+					Woman nextChoiceWoman = new Woman("", -1); // blank Woman object
 					
 					for(int j = 0; j < women.length; j++) {
 						if(women[j].id == man.prefsList[man.nextChoice]) {
@@ -43,10 +68,12 @@ public class GaleShapley {
 				Woman woman = women[j];
 				
 				ArrayList<Person> candidates = woman.proposals;
-				candidates.add(woman.currentFiance);
+				if(woman.currentFiance != null) {
+					candidates.add(woman.currentFiance);
+				}
 				
 				int mostPrefIndex = woman.prefsList.length;
-				Person mostPref = new Person("");
+				Person mostPref = new Person("", -1); // blank Person
 				
 				for(int k = 0; k < candidates.size(); k++ )
 				{
@@ -75,12 +102,16 @@ public class GaleShapley {
 			}
 		}
 		
-		Person[][] output = {};
+		List<List<Person>> output = new ArrayList<List<Person>>();
 		
 		for(int i = 0; i < men.length; i++) {
-			output[i][0] = men[i];
-			output[i][1] = men[i].currentFiance;
+			ArrayList<Person> matchRow = new ArrayList<Person>();
+			output.add(matchRow);
+			
+			matchRow.add(men[i]);
+			matchRow.add(men[i].currentFiance);
 		}
+	
 		
 		return output;
 	}
