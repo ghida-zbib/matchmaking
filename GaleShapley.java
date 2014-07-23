@@ -6,34 +6,40 @@ public class GaleShapley {
 	
 	public static void main(String[] args) {
 		
-		Person man1 = new Person("Joe", 1);
-		Person man2 = new Person("Mark", 2);
-		Person man3 = new Person("Amit", 3);
+		Person man1 = new Person("A", 1);
+		Person man2 = new Person("B", 2);
+		Person man3 = new Person("C", 3);
+		Person man4= new Person ("D", 4);
 		
-		int[] man1Prefs = {3, 2, 1}; // these are the IDs of his preferences, in order
-		int[] man2Prefs = {2, 3, 1};
-		int[] man3Prefs = {2, 1, 3};
+		int[] man1Prefs = {3, 4, 2, 1}; // these are the IDs of his preferences, in order
+		int[] man2Prefs = {2, 3, 4, 1};
+		int[] man3Prefs = {2, 1, 4, 3};
+		int[] man4Prefs = {1, 2, 3, 4};
 		
 		man1.setPrefsList(man1Prefs);
 		man2.setPrefsList(man2Prefs);
 		man3.setPrefsList(man3Prefs);
+		man4.setPrefsList(man4Prefs);
 		
 		Woman woman1 = new Woman("Alpha", 1);
 		Woman woman2 = new Woman("Beta", 2);
 		Woman woman3 = new Woman("Gamma", 3);
+		Woman woman4 = new Woman ("Delta", 4);
 		
-		int[] woman1Prefs = {1, 2, 3};
-		int[] woman2Prefs = {2, 3, 1};
-		int[] woman3Prefs = {2, 1, 3};
+		int[] woman1Prefs = {4, 1, 2, 3};
+		int[] woman2Prefs = {2, 4, 3, 1};
+		int[] woman3Prefs = {4, 2, 1, 3};
+		int[] woman4Prefs = {1, 2, 3, 4};
 		
 		woman1.setPrefsList(woman1Prefs);
 		woman2.setPrefsList(woman2Prefs);
 		woman3.setPrefsList(woman3Prefs);
+		woman4.setPrefsList(woman4Prefs);
 		
-		Person[] men = {man1, man2, man3};
-		Woman[] women = {woman1, woman2, woman3};
+		Person[] men = {man1, man2, man3, man4};
+		Woman[] women = {woman1, woman2, woman3, woman4};
 		
-		List<List<Person>> galeShapleyOutput = galeShapley(men, women, 3);
+		List<List<Person>> galeShapleyOutput = galeShapley(men, women, 4);
 		for(int i = 0; i < galeShapleyOutput.size(); i++) {
 			List<Person> matchRow = galeShapleyOutput.get(i);
 			System.out.println(matchRow.get(0).name + " is matched with " + matchRow.get(1).name);
