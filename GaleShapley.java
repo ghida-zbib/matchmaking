@@ -4,23 +4,7 @@ import java.util.List;
 
 public class GaleShapley {
 	
-	public static void main(String[] args) {
-		
-		Person man1 = new Person("A", 1);
-		Person man2 = new Person("B", 2);
-		Person man3 = new Person("C", 3);
-		Person man4= new Person ("D", 4);
-		
-		int[] man1Prefs = {3, 4, 2, 1}; // these are the IDs of his preferences, in order
-		int[] man2Prefs = {2, 3, 4, 1};
-		int[] man3Prefs = {2, 1, 4, 3};
-		int[] man4Prefs = {1, 2, 3, 4};
-		
-		man1.setPrefsList(man1Prefs);
-		man2.setPrefsList(man2Prefs);
-		man3.setPrefsList(man3Prefs);
-		man4.setPrefsList(man4Prefs);
-		
+	static Woman[] manualWomenInput() {
 		Woman woman1 = new Woman("Alpha", 1);
 		Woman woman2 = new Woman("Beta", 2);
 		Woman woman3 = new Woman("Gamma", 3);
@@ -36,14 +20,42 @@ public class GaleShapley {
 		woman3.setPrefsList(woman3Prefs);
 		woman4.setPrefsList(woman4Prefs);
 		
-		Person[] men = {man1, man2, man3, man4};
 		Woman[] women = {woman1, woman2, woman3, woman4};
+		return women;
+	}
+	
+	static Person[] manualMenInput() {
+		Person man1 = new Person("A", 1);
+		Person man2 = new Person("B", 2);
+		Person man3 = new Person("C", 3);
+		Person man4= new Person ("D", 4);
 		
+		int[] man1Prefs = {3, 4, 2, 1}; // these are the IDs of his preferences, in order
+		int[] man2Prefs = {2, 3, 4, 1};
+		int[] man3Prefs = {2, 1, 4, 3};
+		int[] man4Prefs = {1, 2, 3, 4};
+		
+		man1.setPrefsList(man1Prefs);
+		man2.setPrefsList(man2Prefs);
+		man3.setPrefsList(man3Prefs);
+		man4.setPrefsList(man4Prefs);
+		
+		Person[] men = {man1, man2, man3, man4};
+		return men;
+	}
+	
+	public static void displayFromManual() {
+		Person[] men = manualMenInput();
+		Woman[] women = manualWomenInput();
 		List<List<Person>> galeShapleyOutput = galeShapley(men, women, 4);
 		for(int i = 0; i < galeShapleyOutput.size(); i++) {
 			List<Person> matchRow = galeShapleyOutput.get(i);
 			System.out.println(matchRow.get(0).name + " is matched with " + matchRow.get(1).name);
 		}
+	}
+	
+	public static void main(String[] args) {
+		displayFromManual();
 	}
 	
 	public static List<List<Person>> galeShapley(Person[] men, Woman[] women, int n) {
