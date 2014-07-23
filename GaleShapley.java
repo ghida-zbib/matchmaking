@@ -73,7 +73,7 @@ public class GaleShapley {
 				}
 				
 				int mostPrefIndex = woman.prefsList.length;
-				Person mostPref = new Person("", -1); // blank Person
+				Person mostPref = null; // blank Person
 				
 				for(int k = 0; k < candidates.size(); k++ )
 				{
@@ -88,12 +88,11 @@ public class GaleShapley {
 					}
 				}
 				
-				if(woman.currentFiance == null) {
+				if(woman.currentFiance == null && mostPref != null) {
 					engagedCount++;
+					woman.currentFiance = mostPref;
+					mostPref.currentFiance = woman;
 				}
-				
-				woman.currentFiance = mostPref;
-				mostPref.currentFiance = woman;
 				
 			}
 			
