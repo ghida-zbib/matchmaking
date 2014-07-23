@@ -28,7 +28,7 @@ public class GaleShapley {
 		Person man1 = new Person("A", 1);
 		Person man2 = new Person("B", 2);
 		Person man3 = new Person("C", 3);
-		Person man4= new Person ("D", 4);
+		Person man4 = new Person ("D", 4);
 		
 		int[] man1Prefs = {3, 4, 2, 1}; // these are the IDs of his preferences, in order
 		int[] man2Prefs = {2, 3, 4, 1};
@@ -54,6 +54,10 @@ public class GaleShapley {
 		}
 	}
 	
+	public static void displayFromFile() {
+		
+	}
+	
 	public static void main(String[] args) {
 		displayFromManual();
 	}
@@ -68,8 +72,6 @@ public class GaleShapley {
 						
 				if(man.currentFiance == null) {
 					
-					man.nextChoice++;
-					
 					/* propose to the next choice */
 					
 					Woman nextChoiceWoman = null; // blank Woman object
@@ -81,6 +83,7 @@ public class GaleShapley {
 					}
 				
 					nextChoiceWoman.proposals.add(man);
+					man.nextChoice++;
 				}
 				
 			}
