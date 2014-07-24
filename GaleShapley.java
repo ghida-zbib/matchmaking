@@ -74,12 +74,12 @@ public class GaleShapley {
 	}
 	
 	public static void displayFromFile() throws FileNotFoundException {
-		File inputFile = new File("matchTests.txt");
+		File inputFile = new File("src/matchTests.txt");
 		FileReader inReader = new FileReader(inputFile);
 		BufferedReader buffReader = new BufferedReader(inReader);
 		
-		Integer n;
-		Integer t;
+		Integer n = 0;
+		Integer t = 0;
 		
 		List<Person> men = new ArrayList<Person>();
 		List<Woman> women = new ArrayList<Woman>();
@@ -157,7 +157,7 @@ public class GaleShapley {
 			Person[] menArray = men.toArray(new Person[men.size()]);
 			Woman[] womenArray = women.toArray(new Woman[women.size()]);
 			
-			List<List<Person>> galeShapleyOutput = galeShapley(menArray, womenArray, 6);
+			List<List<Person>> galeShapleyOutput = galeShapley(menArray, womenArray, n);
 			for(int i = 0; i < galeShapleyOutput.size(); i++) {
 				List<Person> matchRow = galeShapleyOutput.get(i);
 				System.out.println(matchRow.get(0).name + " is matched with " + matchRow.get(1).name);
@@ -254,7 +254,7 @@ public class GaleShapley {
 		try {
 			displayFromFile();
 		} catch (FileNotFoundException e) {
-			System.out.println("Input file not found");
+			e.printStackTrace();
 		}
 	}
 	
