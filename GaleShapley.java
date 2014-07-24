@@ -100,7 +100,7 @@ public class GaleShapley {
 			}
 			
 			String womenString = buffReader.readLine();
-			String[] womenStringArray = menString.split(" ");
+			String[] womenStringArray = womenString.split(" ");
 			
 			int womenIdCounter = 1;
 			
@@ -114,19 +114,19 @@ public class GaleShapley {
 				String manPrefsString = buffReader.readLine();
 				String[] splitPrefs = manPrefsString.split(" ");
 				
-				List<Integer> prefs = new ArrayList<Integer>();
+				List<Integer> prefsList = new ArrayList<Integer>();
 				
 				for(int j = 0; j < splitPrefs.length; j++) {
-					prefs.add(Integer.parseInt(splitPrefs[i]));
+					prefsList.add(Integer.parseInt(splitPrefs[j]));
 				}
 				
-				int[] prefsList = new int[prefs.size()];
+				int[] prefs = new int[prefsList.size()];
 				
-				for(int j = 0; j < prefs.size(); j++) {
-					prefsList[j] = prefs.get(j);
+				for(int j = 0; j < prefsList.size(); j++) {
+					prefs[j] = prefsList.get(j);
 				}
 				
-				men.get(i).prefsList = prefsList;
+				men.get(i).prefsList = prefs;
 			}
 			
 			for(int i = 0; i < women.size(); i++) {
@@ -136,7 +136,7 @@ public class GaleShapley {
 				List<Integer> prefs = new ArrayList<Integer>();
 				
 				for(int j = 0; j < splitPrefs.length; j++) {
-					prefs.add(Integer.parseInt(splitPrefs[i]));
+					prefs.add(Integer.parseInt(splitPrefs[j]));
 				}
 				
 				int[] prefsList = new int[prefs.size()];
@@ -186,6 +186,7 @@ public class GaleShapley {
 					}
 				
 					nextChoiceWoman.proposals.add(man);
+					assert(man.nextChoice < n-1);
 					man.nextChoice++;
 				}
 				
@@ -217,6 +218,10 @@ public class GaleShapley {
 				
 				if(woman.currentFiance == null && mostPref != null) {
 					engagedCount++;
+					woman.currentFiance = mostPref;
+					mostPref.currentFiance = woman;
+				}
+				else if(woman.currentFiance != null && mostPref != woman.currentFiance) {
 					woman.currentFiance = mostPref;
 					mostPref.currentFiance = woman;
 				}
