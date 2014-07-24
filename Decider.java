@@ -25,79 +25,27 @@ public class Decider {
 	//find compatability based on blood type
 	public void stringToBlood (String firstBloodType, String secondBloodType)
 	{
-		if ((firstBloodType==("O+")) && (secondBloodType==("O+")))
+		if (firstBloodType==secondBloodType)
 		{
 			kidneyCompatability+=90;
 		}
-		else if ((firstBloodType=="O+") && (secondBloodType=="O-"))
+		else if ((firstBloodType.substring(firstBloodType.length()-1))==(secondBloodType.substring(secondBloodType.length()-1)))
 		{
 			kidneyCompatability+=45;
 		}
-		else if ((firstBloodType=="O+"))
-		{
-			kidneyCompatability+=10;
-		}
-		else if ((firstBloodType=="O-") && (secondBloodType=="O-"))
+		else if ((firstBloodType.substring(firstBloodType.length()-1)==(secondBloodType.substring(secondBloodType.length()-1))))
 		{
 			kidneyCompatability+=90;
 		}
-		else if ((firstBloodType=="O-") && (secondBloodType=="O+"))
+		else if ((firstBloodType.substring(firstBloodType.length()-1)!=(secondBloodType.substring(secondBloodType.length()-1))))
 		{
 			kidneyCompatability+=45;
 		}
-		else if ((firstBloodType==("O-")))
-		{
-			kidneyCompatability+=10;
-		}
-		else if ((firstBloodType==("A+")) && (secondBloodType==("A+") || secondBloodType==("O+")))
+		else if (firstBloodType.substring(firstBloodType.length()-2, firstBloodType.length()-1)==("AB") && firstBloodType.substring(firstBloodType.length()-1)==(secondBloodType.substring(secondBloodType.length()-1)))
 		{
 			kidneyCompatability+=90;
 		}
-		else if ((firstBloodType==("A+")) && (secondBloodType==("A-") || secondBloodType==("O-")))
-		{
-			kidneyCompatability+=45;
-		}
-		else if (firstBloodType==("A+"))
-		{
-			kidneyCompatability+=10;
-		}
-		else if ((firstBloodType==("B+")) && (secondBloodType==("B+") || secondBloodType==("O+")))
-		{
-			kidneyCompatability+=90;
-		}
-		else if ((firstBloodType==("B+")) && (secondBloodType==("B-") || secondBloodType==("O-")))
-		{
-			kidneyCompatability+=45;
-		}
-		else if(firstBloodType==("B+"))
-		{
-			kidneyCompatability+=10;
-		}
-		else if ((firstBloodType==("B-")) && (secondBloodType==("B-") || secondBloodType==("O-")))
-		{
-			kidneyCompatability+=90;
-		}
-		else if ((firstBloodType==("B-")) && (secondBloodType==("B+") || secondBloodType==("O+")))
-		{
-			kidneyCompatability+=45;
-		}
-		else if (firstBloodType==("B-"))
-		{
-			kidneyCompatability+=90;
-		}
-		else if ((firstBloodType==("AB+")) && (secondBloodType==("A+") || secondBloodType==("B+") || secondBloodType==("O+") || secondBloodType==("AB+")))
-		{
-			kidneyCompatability+=90;
-		}
-		else if ((firstBloodType==("AB+")) && (secondBloodType==("A-") || secondBloodType==("B-") || secondBloodType==("O-") || secondBloodType==("AB-")))
-		{
-			kidneyCompatability+=45;
-		}
-		else if ((firstBloodType==("AB-")) && (secondBloodType==("A-") || secondBloodType==("B-") || secondBloodType==("O-") || secondBloodType==("AB-")))
-		{
-			kidneyCompatability+=90;
-		}
-		else if ((firstBloodType==("AB-")) && (secondBloodType==("A+") || secondBloodType==("B+") || secondBloodType==("O+") || secondBloodType==("AB+")))
+		else if (firstBloodType.substring(firstBloodType.length()-2, firstBloodType.length()-1)==("AB") && firstBloodType.substring(firstBloodType.length()-1)!=(secondBloodType.substring(secondBloodType.length()-1)))
 		{
 			kidneyCompatability+=45;
 		}
