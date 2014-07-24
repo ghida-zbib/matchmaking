@@ -2,8 +2,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -72,9 +74,95 @@ public class GaleShapley {
 	}
 	
 	public static void displayFromFile() throws FileNotFoundException {
-		BufferedReader inReader = new BufferedReader(new FileReader("matches.in"));
-		char[] input;
-		/* read into here later */
+		File inputFile = new File("matchTests.txt");
+		FileReader inReader = new FileReader(inputFile);
+		BufferedReader buffReader = new BufferedReader(inReader);
+		
+		Integer n;
+		Integer t;
+		
+		List<Person> men = new ArrayList<Person>();
+		List<Woman> women = new ArrayList<Woman>();
+		
+		try {
+			n = Integer.parseInt(buffReader.readLine());
+			t = Integer.parseInt(buffReader.readLine());
+			
+			String menString = buffReader.readLine();
+			String[] menStringArray = menString.split(" ");
+			
+			int menIdCounter = 1;
+			
+			for(int i = 0; i < menStringArray.length; i++) {
+				Person stringMan = new Person(menStringArray[i], menIdCounter);
+				men.add(stringMan);
+				menIdCounter++;
+			}
+			
+			String womenString = buffReader.readLine();
+			String[] womenStringArray = menString.split(" ");
+			
+			int womenIdCounter = 1;
+			
+			for(int i = 0; i < womenStringArray.length; i++) {
+				Woman stringWoman = new Woman(womenStringArray[i], womenIdCounter);
+				women.add(stringWoman);
+				womenIdCounter++;
+			}
+			
+			for(int i = 0; i < men.size(); i++) {
+				String manPrefsString = buffReader.readLine();
+				String[] splitPrefs = manPrefsString.split(" ");
+				
+				List<Integer> prefs = new ArrayList<Integer>();
+				
+				for(int j = 0; j < splitPrefs.length; j++) {
+					prefs.add(Integer.parseInt(splitPrefs[i]));
+				}
+				
+				int[] prefsList = new int[prefs.size()];
+				
+				for(int j = 0; j < prefs.size(); j++) {
+					prefsList[j] = prefs.get(j);
+				}
+				
+				men.get(i).prefsList = prefsList;
+			}
+			
+			for(int i = 0; i < women.size(); i++) {
+				String womanPrefsString = buffReader.readLine();
+				String[] splitPrefs = womanPrefsString.split(" ");
+				
+				List<Integer> prefs = new ArrayList<Integer>();
+				
+				for(int j = 0; j < splitPrefs.length; j++) {
+					prefs.add(Integer.parseInt(splitPrefs[i]));
+				}
+				
+				int[] prefsList = new int[prefs.size()];
+				
+				for(int j = 0; j < prefs.size(); j++) {
+					prefsList[j] = prefs.get(j);
+				}
+				
+				women.get(i).prefsList = prefsList;
+			}
+			
+			inReader.close();
+		} catch(IOException e) {
+			
+		}
+		finally {
+			
+			Person[] menArray = men.toArray(new Person[men.size()]);
+			Woman[] womenArray = women.toArray(new Woman[women.size()]);
+			
+			List<List<Person>> galeShapleyOutput = galeShapley(menArray, womenArray, 6);
+			for(int i = 0; i < galeShapleyOutput.size(); i++) {
+				List<Person> matchRow = galeShapleyOutput.get(i);
+				System.out.println(matchRow.get(0).name + " is matched with " + matchRow.get(1).name);
+			}
+		}
 	}
 	
 	public static List<List<Person>> galeShapley(Person[] men, Woman[] women, int n) {
@@ -155,11 +243,18 @@ public class GaleShapley {
 	}
 	
 	public static void main(String[] args) {
-		if(Verifier.verify(galeShapley(manualMenInput(), manualWomenInput(), 6))) {
+		/*
+		 if(Verifier.verify(galeShapley(manualMenInput(), manualWomenInput(), 6))) {
 			System.out.println("Yay");
 		}
 		else {
 			System.out.println("Unstable");
+		}
+		*/
+		try {
+			displayFromFile();
+		} catch (FileNotFoundException e) {
+			System.out.println("Input file not found");
 		}
 	}
 	
