@@ -77,10 +77,6 @@ public class GaleShapley {
 		/* read into here later */
 	}
 	
-	public static void main(String[] args) {
-		displayFromManual();
-	}
-	
 	public static List<List<Person>> galeShapley(Person[] men, Woman[] women, int n) {
 		int engagedCount = 0;
 		
@@ -157,4 +153,14 @@ public class GaleShapley {
 		
 		return output;
 	}
+	
+	public static void main(String[] args) {
+		if(Verifier.verify(galeShapley(manualMenInput(), manualWomenInput(), 6))) {
+			System.out.println("Yay");
+		}
+		else {
+			System.out.println("Unstable");
+		}
+	}
+	
 }
