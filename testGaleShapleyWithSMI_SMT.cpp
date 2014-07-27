@@ -6,12 +6,18 @@
 
 using namespace std;
 
+#define TRUE 0
+#define FALSE 1
 void generateRandomTests(int t, int n);
 
 int main (int argc, char *argv[]) {
 	assert (argc == 3);
 	int n = atoi(argv[1]);
 	int t = atoi(argv[2]);
+	int incomplete = atoi(argv[3]);
+	int ties = atoi(argv[3]);
+	assert(incomplete == TRUE or incomplete == FALSE)
+	assert(ties == TRUE or ties == FALSE)
 	//DEFINE 'N' AND 'T'
 	//CALL THE FUNCTIONS
 	generateRandomTests(t, n);
@@ -61,10 +67,24 @@ void generateRandomTests(int t, int n) {
     	}
     	fprintf(outputFile, "\n");
         //CREATE PREFERENCE LISTS
+        int randIndex = 0;
 		for (int i = 0; i < n; i++) {
 			for (int j = 1; j <= n; ++j) {
-				menPrefs[i].push_back(j);
-				womenPrefs[i].push_back(j);
+				if (incomplete == TRUE) {
+					randIndex = rand() % n-1;
+					if (j < (n-rand)) {
+						menPrefs[i].push_back(0);
+						womenPrefs[i].push_back(0);
+					} 											//Here!!!
+				} else {
+						menPrefs[i].push_back(j);
+						womenPrefs[i].push_back(j);
+					}
+				}
+				if (incomplete == FALSE) {
+					menPrefs[i].push_back(j);
+					womenPrefs[i].push_back(j);
+				}
 			}
 			random_shuffle(menPrefs[i].begin(), menPrefs[i].end());
 			random_shuffle(womenPrefs[i].begin(), womenPrefs[i].end());
