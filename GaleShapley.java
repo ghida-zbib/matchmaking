@@ -73,7 +73,7 @@ public class GaleShapley {
 		}
 	}
 	
-	public static void displayFromFile() throws FileNotFoundException {
+	public static List<List<Person>> runFromFile() throws FileNotFoundException {
 		File inputFile = new File("src/matchTests.txt");
 		FileReader inReader = new FileReader(inputFile);
 		BufferedReader buffReader = new BufferedReader(inReader);
@@ -157,11 +157,7 @@ public class GaleShapley {
 			Person[] menArray = men.toArray(new Person[men.size()]);
 			Woman[] womenArray = women.toArray(new Woman[women.size()]);
 			
-			List<List<Person>> galeShapleyOutput = galeShapley(menArray, womenArray, n);
-			for(int i = 0; i < galeShapleyOutput.size(); i++) {
-				List<Person> matchRow = galeShapleyOutput.get(i);
-				System.out.println(matchRow.get(0).name + " is matched with " + matchRow.get(1).name);
-			}
+			return galeShapley(menArray, womenArray, n);
 		}
 	}
 	
@@ -169,6 +165,7 @@ public class GaleShapley {
 		int engagedCount = 0;
 		
 		while(engagedCount < n) {
+			System.out.println(engagedCount);
 			for(int i = 0; i < men.length; i++) {
 				
 				Person man = men[i];
@@ -217,11 +214,14 @@ public class GaleShapley {
 				}
 				
 				if(woman.currentFiance == null && mostPref != null) {
+					// accepting for the first time
 					engagedCount++;
 					woman.currentFiance = mostPref;
 					mostPref.currentFiance = woman;
 				}
 				else if(woman.currentFiance != null && mostPref != woman.currentFiance) {
+					// rejecting current fiance and accepting a new one
+					woman.currentFiance.currentFiance = null;
 					woman.currentFiance = mostPref;
 					mostPref.currentFiance = woman;
 				}
@@ -248,16 +248,14 @@ public class GaleShapley {
 	}
 	
 	public static void main(String[] args) {
-		/*
-		 if(Verifier.verify(galeShapley(manualMenInput(), manualWomenInput(), 6))) {
-			System.out.println("Yay");
-		}
-		else {
-			System.out.println("Unstable");
-		}
-		*/
 		try {
-			displayFromFile();
+			List<List<Person>> fileGaleShapley = runFromFile();
+			if(Verifier.verify(fileGaleShapley)) {
+				System.out.println("Yay");
+			}
+			else {
+				System.out.println("Unstable");
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
