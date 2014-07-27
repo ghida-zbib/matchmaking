@@ -74,7 +74,8 @@ public class GaleShapley {
 	}
 	
 	public static List<List<List<Person>>> runFromFile() throws NumberFormatException, IOException {
-		File inputFile = new File("src/matchTests.txt");
+		long startTime = System.nanoTime();
+		File inputFile = new File("src/matchTests[500x500With1Tests.txt");
 		FileReader inReader = new FileReader(inputFile);
 		BufferedReader buffReader = new BufferedReader(inReader);
 		
@@ -89,7 +90,8 @@ public class GaleShapley {
 		n = Integer.parseInt(buffReader.readLine());
 		t = Integer.parseInt(buffReader.readLine());
 		
-		for(int q = 0; q < t; q++) { 
+		for(int q = 0; q < 1; q++) { 
+			System.out.println(String.format("We are now on test %d", q));
 			
 			String menString = buffReader.readLine();
 			String[] menStringArray = menString.split(" ");
@@ -150,14 +152,17 @@ public class GaleShapley {
 				
 				women.get(i).prefsList = prefsList;
 			}
-			
-			inReader.close();
 		
 			Person[] menArray = men.toArray(new Person[men.size()]);
 			Woman[] womenArray = women.toArray(new Woman[women.size()]);
 			
 			galeShapleyResults.add(galeShapley(menArray, womenArray, n));
 		}
+		
+		long endTime = System.nanoTime();
+		System.out.println(String.format("Total test time for %d tests (%d x %d) took %f seconds", t, n, n, (endTime-startTime)/1000000000.0));
+		
+		inReader.close();
 		
 		return galeShapleyResults;
 	}
@@ -166,7 +171,6 @@ public class GaleShapley {
 		int engagedCount = 0;
 		
 		while(engagedCount < n) {
-			System.out.println(engagedCount);
 			for(int i = 0; i < men.length; i++) {
 				
 				Person man = men[i];
@@ -180,11 +184,12 @@ public class GaleShapley {
 					for(int j = 0; j < women.length; j++) {
 						if(women[j].id == man.prefsList[man.nextChoice]) {
 							nextChoiceWoman = women[j];
+							break;
 						}
 					}
 				
 					nextChoiceWoman.proposals.add(man);
-					assert(man.nextChoice < n-1);
+					assert man.nextChoice < n-1;
 					man.nextChoice++;
 				}
 				
@@ -214,17 +219,19 @@ public class GaleShapley {
 					}
 				}
 				
-				if(woman.currentFiance == null && mostPref != null) {
-					// accepting for the first time
-					engagedCount++;
-					woman.currentFiance = mostPref;
-					mostPref.currentFiance = woman;
-				}
-				else if(woman.currentFiance != null && mostPref != woman.currentFiance) {
-					// rejecting current fiance and accepting a new one
-					woman.currentFiance.currentFiance = null;
-					woman.currentFiance = mostPref;
-					mostPref.currentFiance = woman;
+				if(mostPref != null) {
+					if(woman.currentFiance == null) {
+						// accepting for the first time
+						engagedCount++;
+						woman.currentFiance = mostPref;
+						mostPref.currentFiance = woman;
+					}
+					else if(woman.currentFiance != null && mostPref != woman.currentFiance) {
+						// rejecting current fiance and accepting a new one
+						woman.currentFiance.currentFiance = null;
+						woman.currentFiance = mostPref;
+						mostPref.currentFiance = woman;
+					}
 				}
 				
 			}
@@ -243,9 +250,15 @@ public class GaleShapley {
 			matchRow.add(men[i]);
 			matchRow.add(men[i].currentFiance);
 		}
-	
+		
 		
 		return output;
+	}
+	
+	public static void displayResults(List<List<Person>> galeShapleyResults) {
+		for(int i = 0; i < galeShapleyResults.size(); i++) {
+			System.out.println(galeShapleyResults.get(i).get(0).name + " is matched with " + galeShapleyResults.get(i).get(1).name);
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -253,6 +266,7 @@ public class GaleShapley {
 			List<List<List<Person>>> fileGaleShapley = runFromFile();
 			for(int i = 0; i < fileGaleShapley.size(); i++) {
 				List<List<Person>> galeShapley = fileGaleShapley.get(i);
+				displayResults(galeShapley);
 				if(Verifier.verify(galeShapley)) {
 					System.out.println("Passed test - stable");
 				}
