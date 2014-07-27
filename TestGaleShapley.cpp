@@ -22,7 +22,9 @@ int main (int argc, char *argv[]) {
 void generateRandomTests(int t, int n) {
 	assert(n <= 26);
     //OPEN FILES	
-	FILE *outputFile = fopen("matchTests.txt", "w");
+    char buffer[50];
+    sprintf(buffer, "matchTests[%dx%d].txt", n, n);
+	FILE *outputFile = fopen(buffer, "w");
 	if (outputFile == NULL)
     {
         printf("Error opening file!\n");
