@@ -23,7 +23,7 @@ void generateRandomTests(int t, int n) {
 	assert(n <= 26);
     //OPEN FILES	
     char buffer[50];
-    sprintf(buffer, "matchTests[%dx%d].txt", n, n);
+    sprintf(buffer, "matchTests[%dx%dWith%dTests.txt", n, n, t);
 	FILE *outputFile = fopen(buffer, "w");
 	if (outputFile == NULL)
     {
