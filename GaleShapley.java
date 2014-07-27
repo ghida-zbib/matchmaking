@@ -73,7 +73,7 @@ public class GaleShapley {
 		}
 	}
 	
-	public static List<List<Person>> runFromFile() throws FileNotFoundException {
+	public static List<List<List<Person>>> runFromFile() throws NumberFormatException, IOException {
 		File inputFile = new File("src/matchTests.txt");
 		FileReader inReader = new FileReader(inputFile);
 		BufferedReader buffReader = new BufferedReader(inReader);
@@ -84,9 +84,12 @@ public class GaleShapley {
 		List<Person> men = new ArrayList<Person>();
 		List<Woman> women = new ArrayList<Woman>();
 		
-		try {
-			n = Integer.parseInt(buffReader.readLine());
-			t = Integer.parseInt(buffReader.readLine());
+		List<List<List<Person>>> galeShapleyResults = new ArrayList<List<List<Person>>>();
+		
+		n = Integer.parseInt(buffReader.readLine());
+		t = Integer.parseInt(buffReader.readLine());
+		
+		for(int q = 0; q < t; q++) { 
 			
 			String menString = buffReader.readLine();
 			String[] menStringArray = menString.split(" ");
@@ -149,16 +152,14 @@ public class GaleShapley {
 			}
 			
 			inReader.close();
-		} catch(IOException e) {
-			
-		}
-		finally {
-			
+		
 			Person[] menArray = men.toArray(new Person[men.size()]);
 			Woman[] womenArray = women.toArray(new Woman[women.size()]);
 			
-			return galeShapley(menArray, womenArray, n);
+			galeShapleyResults.add(galeShapley(menArray, womenArray, n));
 		}
+		
+		return galeShapleyResults;
 	}
 	
 	public static List<List<Person>> galeShapley(Person[] men, Woman[] women, int n) {
@@ -249,15 +250,20 @@ public class GaleShapley {
 	
 	public static void main(String[] args) {
 		try {
-			List<List<Person>> fileGaleShapley = runFromFile();
-			if(Verifier.verify(fileGaleShapley)) {
-				System.out.println("Yay");
+			List<List<List<Person>>> fileGaleShapley = runFromFile();
+			for(int i = 0; i < fileGaleShapley.size(); i++) {
+				List<List<Person>> galeShapley = fileGaleShapley.get(i);
+				if(Verifier.verify(galeShapley)) {
+					System.out.println("Passed test - stable");
+				}
+				else {
+					System.out.println("Failed test - unstable");
+				}
 			}
-			else {
-				System.out.println("Unstable");
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch(IOException e2) {
+			e2.printStackTrace();
 		}
 	}
 	
