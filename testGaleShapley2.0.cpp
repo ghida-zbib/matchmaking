@@ -30,34 +30,34 @@ void generateRandomTests(int t, int n) {
     }
 	//t = tests
 	//n = length of matrix
-	vector <char> menNames(n);
-	vector <char> womenNames(n);
+	vector <int> menNames(n);
+	vector <int> womenNames(n);
 	vector <vector <int> > menPrefs(n);
 	vector <vector <int> > womenPrefs(n);
-	char nameCounterMen = 'A';
-	char nameCounterWomen = 'a';
+	int nameCounterMen = 1;
+	int nameCounterWomen = 1;
     //OUTPUT N AND T
     printf ("Output T = [%d] and N = [%d]\n", t, n);
     fprintf(outputFile, "%d\n", n);
     fprintf(outputFile, "%d\n", t);
     //Generate correct number of tests
     for (int numTests = 0; numTests < t; numTests++) {
-    	nameCounterMen = 'A';
-    	nameCounterWomen = 'a';
+    	nameCounterMen = 1;
+    	nameCounterWomen = 1;
         //OUTPUT NAMES (MEN THEN WOMEN ON SEPARATE LINE FOR SEPARATE GENDER)
     	//Name and output array for men's names
     	for (int counter = 0; counter < n; counter++) {
 			menNames[counter] = nameCounterMen;
-    		printf ("Output array for men's names [%c]\n", menNames[counter]);
-    		fprintf(outputFile, "%c ", menNames[counter]);
+    		printf ("Output array for men's names [%d]\n", menNames[counter]);
+    		fprintf(outputFile, "%d ", menNames[counter]);
     		nameCounterMen++;
     	}
     	fprintf(outputFile, "\n");
     	//Name and output array for women's names
     	for (int counter = 0; counter < n; counter++) {
 			womenNames[counter] = nameCounterWomen;
-    		printf ("Output array for women's names [%c]\n", womenNames[counter]);
-    		fprintf(outputFile, "%c ", womenNames[counter]);
+    		printf ("Output array for women's names [%d]\n", womenNames[counter]);
+    		fprintf(outputFile, "%d ", womenNames[counter]);
             nameCounterWomen++;
     	}
     	fprintf(outputFile, "\n");
