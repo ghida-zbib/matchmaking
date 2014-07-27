@@ -165,6 +165,7 @@ public class GaleShapley {
 		int engagedCount = 0;
 		
 		while(engagedCount < n) {
+			System.out.println(engagedCount);
 			for(int i = 0; i < men.length; i++) {
 				
 				Person man = men[i];
@@ -213,11 +214,14 @@ public class GaleShapley {
 				}
 				
 				if(woman.currentFiance == null && mostPref != null) {
+					// accepting for the first time
 					engagedCount++;
 					woman.currentFiance = mostPref;
 					mostPref.currentFiance = woman;
 				}
 				else if(woman.currentFiance != null && mostPref != woman.currentFiance) {
+					// rejecting current fiance and accepting a new one
+					woman.currentFiance.currentFiance = null;
 					woman.currentFiance = mostPref;
 					mostPref.currentFiance = woman;
 				}
