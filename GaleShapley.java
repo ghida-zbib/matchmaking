@@ -257,6 +257,7 @@ public class GaleShapley {
 					else {
 						man.exhausted = true;
 						exhaustedCount++;
+						man.currentFiance = new Nobody();
 					}
 				}
 				
