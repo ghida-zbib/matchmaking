@@ -19,12 +19,12 @@ public class GaleShapley {
 		Woman woman5 = new Woman ("Epsilon", 5);
 		Woman woman6 = new Woman ("Omega", 6);
 		
-		int[] woman1Prefs = {5, 4, 1, 2, 3};
-		int[] woman2Prefs = {6, 5, 2, 4, 3, 1};
+		int[] woman1Prefs = {5};
+		int[] woman2Prefs = {6, 5};
 		int[] woman3Prefs = {4, 6, 2};
 		int[] woman4Prefs = {1};
-		int[] woman5Prefs = {3, 4, 5, 6};
-		int[] woman6Prefs = {1, 6, 4, 3, 2, 5};
+		int[] woman5Prefs = {3};
+		int[] woman6Prefs = {1, 6};
 		
 		woman1.setPrefsList(woman1Prefs);
 		woman2.setPrefsList(woman2Prefs);
@@ -71,12 +71,12 @@ public class GaleShapley {
 		Man man5= new Man ("E", 5);
 		Man man6= new Man ("F", 6);
 		
-		int[] man1Prefs = {3, 4, 2}; // these are the IDs of his preferences, in order
+		int[] man1Prefs = {3}; // these are the IDs of his preferences, in order
 		int[] man2Prefs = {2, 6};
-		int[] man3Prefs = {5, 2, 1, 4};
-		int[] man4Prefs = {1, 2, 3, 4, 5, 6};
-		int[] man5Prefs = {5, 6, 1, 2, 3, 4};
-		int[] man6Prefs = {2, 4, 1, 5, 6};
+		int[] man3Prefs = {5};
+		int[] man4Prefs = {1, 2};
+		int[] man5Prefs = {5, 6, 1};
+		int[] man6Prefs = {2, 4};
 		
 		man1.setPrefsList(man1Prefs);
 		man2.setPrefsList(man2Prefs);
@@ -251,7 +251,7 @@ public class GaleShapley {
 				
 					nextChoiceWoman.proposals.add(man);
 					assert man.nextChoice < n-1;
-					if(man.nextChoice < n-1) {
+					if(man.nextChoice < man.prefsList.length-1) {
 						man.nextChoice++;
 					}
 					else {
