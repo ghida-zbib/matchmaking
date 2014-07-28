@@ -6,24 +6,20 @@
 
 using namespace std;
 
-#define TRUE 0
-#define FALSE 1
-
-void generateRandomTests(int t, int n, int incomplete);
+void generateRandomTests(int t, int n);
 
 int main (int argc, char *argv[]) {
-	assert (argc == 4);
+	assert (argc == 3);
 	int n = atoi(argv[1]);
 	int t = atoi(argv[2]);
-	int incomplete = atoi(argv[3]);
 	//DEFINE 'N' AND 'T'
 	//CALL THE FUNCTIONS
-	generateRandomTests(t, n, incomplete);
+	generateRandomTests(t, n);
 	return EXIT_SUCCESS;
 }
 
 //Generate Random Tests
-void generateRandomTests(int t, int n, int incomplete) {
+void generateRandomTests(int t, int n) {
     //OPEN FILES	
     char buffer[50];
     sprintf(buffer, "matchTests[%dx%dWith%dTests.txt", n, n, t);
@@ -42,38 +38,35 @@ void generateRandomTests(int t, int n, int incomplete) {
 	int nameCounterWomen = 1;
 	int iterations = 0;
     //OUTPUT N AND T
+    printf("%d\n", n);
+    printf("%d\n", t);
     fprintf(outputFile, "%d\n", n);
     fprintf(outputFile, "%d\n", t);
     //Generate correct number of tests
-	if (incomplete == TRUE) {
-		int randIndex = rand() % n-1;	
-		for (int i = 0; i < n; i++) {
-			for (int j = 1; j <= n-randIndex; j++) {
-				menPrefs[i].push_back(j);
-				womenPrefs[i].push_back(j);
-			}
-		}	
-	} else {
-		for (int i = 0; i < n; i++) {
-			for (int j = 1; j <= n; j++) {
-				menPrefs[i].push_back(j);
-				womenPrefs[i].push_back(j);
-			}
-		}		}
+	for (int i = 0; i < n; i++) {
+	   for (int j = 1; j <= n; j++) {
+			menPrefs[i].push_back(j);
+			womenPrefs[i].push_back(j);
+		}
+	}	
    for (int numTests = 0; numTests < t; numTests++) {
     	nameCounterMen = 1;
     	nameCounterWomen = 1;
         //OUTPUT NAMES (MEN THEN WOMEN ON SEPARATE LINE FOR SEPARATE GENDER)
     	//Name and output array for men's names
+    	printf("Men's Names\n");
     	for (int counter = 0; counter < n; counter++) {
 			menNames[counter] = nameCounterMen;
+    		printf("%d ", menNames[counter]);
     		fprintf(outputFile, "%d ", menNames[counter]);
     		nameCounterMen++;
     	}
     	fprintf(outputFile, "\n");
+    	printf("\nWomen's Names\n");
     	//Name and output array for women's names
     	for (int counter = 0; counter < n; counter++) {
 			womenNames[counter] = nameCounterWomen;
+    		printf("%d ", menNames[counter]);
     		fprintf(outputFile, "%d ", womenNames[counter]);
             nameCounterWomen++;
     	}
@@ -82,11 +75,15 @@ void generateRandomTests(int t, int n, int incomplete) {
 		for (int i = 0; i < n; i++) {
 			random_shuffle(menPrefs[i].begin(), menPrefs[i].end());
 			random_shuffle(womenPrefs[i].begin(), womenPrefs[i].end());
+			printf("\nMan %d's Prefs\n", i);
 			for (int k = 0; k < n; k++) {
+				printf("%d ", menPrefs[i][k]);
 				fprintf(outputFile, "%d ", menPrefs[i][k]);
 			}
     		fprintf(outputFile, "\n");
+    		printf("\nWoman %d's Prefs\n", i);
 			for (int k = 0; k < n; k++) {
+				printf("%d ", womenPrefs[i][k]);
 				fprintf(outputFile, "%d ", womenPrefs[i][k]);
 			}
     		fprintf(outputFile, "\n");
@@ -97,7 +94,7 @@ void generateRandomTests(int t, int n, int incomplete) {
         //Women Preferences
         fprintf(outputFile, "\n");
         iterations++;
-     printf ("Completed Iteration [%d]\n", iterations);
+     printf ("\nCompleted Iteration [%d]\n", iterations);
 
     }
     //CLOSE FILES

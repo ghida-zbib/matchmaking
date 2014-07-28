@@ -12,7 +12,7 @@ using namespace std;
 void generateRandomTests(int t, int n, int incomplete);
 
 int main (int argc, char *argv[]) {
-	assert (argc == 4);
+	assert (argc == 3);
 	int n = atoi(argv[1]);
 	int t = atoi(argv[2]);
 	int incomplete = atoi(argv[3]);
@@ -46,7 +46,7 @@ void generateRandomTests(int t, int n, int incomplete) {
     fprintf(outputFile, "%d\n", t);
     //Generate correct number of tests
 	if (incomplete == TRUE) {
-		int randIndex = rand() % n-1;	
+		randIndex = rand() % n-1;	
 		for (int i = 0; i < n; i++) {
 			for (int j = 1; j <= n-randIndex; j++) {
 				menPrefs[i].push_back(j);

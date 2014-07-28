@@ -11,6 +11,32 @@ import java.util.List;
 
 public class GaleShapley {
 	
+	static Woman[] manualIncompleteWomenInput() {
+		Woman woman1 = new Woman("Alpha", 1);
+		Woman woman2 = new Woman("Beta", 2);
+		Woman woman3 = new Woman("Gamma", 3);
+		Woman woman4 = new Woman ("Delta", 4);
+		Woman woman5 = new Woman ("Epsilon", 5);
+		Woman woman6 = new Woman ("Omega", 6);
+		
+		int[] woman1Prefs = {5, 4, 1, 2, 3};
+		int[] woman2Prefs = {6, 5, 2, 4, 3, 1};
+		int[] woman3Prefs = {4, 6, 2};
+		int[] woman4Prefs = {1};
+		int[] woman5Prefs = {3, 4, 5, 6};
+		int[] woman6Prefs = {1, 6, 4, 3, 2, 5};
+		
+		woman1.setPrefsList(woman1Prefs);
+		woman2.setPrefsList(woman2Prefs);
+		woman3.setPrefsList(woman3Prefs);
+		woman4.setPrefsList(woman4Prefs);
+		woman5.setPrefsList(woman5Prefs);
+		woman6.setPrefsList(woman6Prefs);
+		
+		Woman[] women = {woman1, woman2, woman3, woman4, woman5, woman6};
+		return women;
+	}
+	
 	static Woman[] manualWomenInput() {
 		Woman woman1 = new Woman("Alpha", 1);
 		Woman woman2 = new Woman("Beta", 2);
@@ -35,6 +61,32 @@ public class GaleShapley {
 		
 		Woman[] women = {woman1, woman2, woman3, woman4, woman5, woman6};
 		return women;
+	}
+	
+	static Man[] manualIncompleteMenInput() {
+		Man man1 = new Man("A", 1);
+		Man man2 = new Man("B", 2);
+		Man man3 = new Man("C", 3);
+		Man man4 = new Man ("D", 4);
+		Man man5= new Man ("E", 5);
+		Man man6= new Man ("F", 6);
+		
+		int[] man1Prefs = {3, 4, 2}; // these are the IDs of his preferences, in order
+		int[] man2Prefs = {2, 6};
+		int[] man3Prefs = {5, 2, 1, 4};
+		int[] man4Prefs = {1, 2, 3, 4, 5, 6};
+		int[] man5Prefs = {5, 6, 1, 2, 3, 4};
+		int[] man6Prefs = {2, 4, 1, 5, 6};
+		
+		man1.setPrefsList(man1Prefs);
+		man2.setPrefsList(man2Prefs);
+		man3.setPrefsList(man3Prefs);
+		man4.setPrefsList(man4Prefs);
+		man5.setPrefsList(man5Prefs);
+		man6.setPrefsList(man6Prefs);
+		
+		Man[] men = {man1, man2, man3, man4, man5, man6};
+		return men;
 	}
 	
 	static Man[] manualMenInput() {
@@ -73,9 +125,17 @@ public class GaleShapley {
 		}
 	}
 	
+	public static void displayFromIncompleteManual() {
+		List<List<Person>> galeShapleyOutput = galeShapley(manualIncompleteMenInput(), manualIncompleteWomenInput(), 6);
+		for(int i = 0; i < galeShapleyOutput.size(); i++) {
+			List<Person> matchRow = galeShapleyOutput.get(i);
+			System.out.println(matchRow.get(0).name + " is matched with " + matchRow.get(1).name);
+		}
+	}
+	
 	public static List<List<List<Person>>> runFromFile() throws NumberFormatException, IOException {
 		long startTime = System.nanoTime();
-		File inputFile = new File("src/matchTests[127x127With1Tests.txt");
+		File inputFile = new File("src/matchTests[60x60With1Tests.txt");
 		FileReader inReader = new FileReader(inputFile);
 		BufferedReader buffReader = new BufferedReader(inReader);
 		
@@ -277,7 +337,9 @@ public class GaleShapley {
 	}
 	
 	public static void main(String[] args) {
+		/*
 		try {
+			
 			List<List<List<Person>>> fileGaleShapley = runFromFile();
 			for(int i = 0; i < fileGaleShapley.size(); i++) {
 				List<List<Person>> galeShapley = fileGaleShapley.get(i);
@@ -294,6 +356,10 @@ public class GaleShapley {
 		} catch(IOException e2) {
 			e2.printStackTrace();
 		}
+		
+			*/
+			
+	displayFromIncompleteManual();
 	}
 	
 }
