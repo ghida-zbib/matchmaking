@@ -75,7 +75,7 @@ public class GaleShapley {
 	
 	public static List<List<List<Person>>> runFromFile() throws NumberFormatException, IOException {
 		long startTime = System.nanoTime();
-		File inputFile = new File("src/matchTests[500x500With1Tests.txt");
+		File inputFile = new File("src/matchTests[127x127With1Tests.txt");
 		FileReader inReader = new FileReader(inputFile);
 		BufferedReader buffReader = new BufferedReader(inReader);
 		
@@ -169,6 +169,7 @@ public class GaleShapley {
 	
 	public static List<List<Person>> galeShapley(Person[] men, Woman[] women, int n) {
 		int engagedCount = 0;
+		int exhaustedCount = 0;
 		
 		while(engagedCount < n) {
 			for(int i = 0; i < men.length; i++) {
@@ -190,7 +191,13 @@ public class GaleShapley {
 				
 					nextChoiceWoman.proposals.add(man);
 					assert man.nextChoice < n-1;
-					man.nextChoice++;
+					if(man.nextChoice < n-1) {
+						man.nextChoice++;
+					}
+					else {
+						man.exhausted = true;
+						exhaustedCount++;
+					}
 				}
 				
 			}
@@ -259,6 +266,13 @@ public class GaleShapley {
 		for(int i = 0; i < galeShapleyResults.size(); i++) {
 			System.out.println(galeShapleyResults.get(i).get(0).name + " is matched with " + galeShapleyResults.get(i).get(1).name);
 		}
+	}
+	
+	public static String generateFile(int n, int t) throws IOException {
+		Runtime rt = Runtime.getRuntime();
+		String command = String.format("./testgs %d %d", n, t);
+		rt.exec(command);
+		return String.format("matchTests[%dx%dWith%dTests.txt", n, n, t);
 	}
 	
 	public static void main(String[] args) {

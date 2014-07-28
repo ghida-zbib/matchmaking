@@ -5,6 +5,7 @@ public class Person {
 	protected int[] prefsList; // indices of their preferences, in order, in the input arrays
 	protected int nextChoice;
 	protected int id;
+	boolean exhausted;
 	
 	public Person(String name, int id) {
 		this.name = name;
