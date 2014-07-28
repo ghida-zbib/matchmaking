@@ -15,7 +15,7 @@ int main (int argc, char *argv[]) {
 	int n = atoi(argv[1]);
 	int t = atoi(argv[2]);
 	int incomplete = atoi(argv[3]);
-	int ties = atoi(argv[3]);
+	int ties = atoi(argv[4]);
 	assert(incomplete == TRUE or incomplete == FALSE)
 	assert(ties == TRUE or ties == FALSE)
 	//DEFINE 'N' AND 'T'
