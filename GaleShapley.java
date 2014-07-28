@@ -37,13 +37,13 @@ public class GaleShapley {
 		return women;
 	}
 	
-	static Person[] manualMenInput() {
-		Person man1 = new Person("A", 1);
-		Person man2 = new Person("B", 2);
-		Person man3 = new Person("C", 3);
-		Person man4 = new Person ("D", 4);
-		Person man5= new Person ("E", 5);
-		Person man6= new Person ("F", 6);
+	static Man[] manualMenInput() {
+		Man man1 = new Man("A", 1);
+		Man man2 = new Man("B", 2);
+		Man man3 = new Man("C", 3);
+		Man man4 = new Man ("D", 4);
+		Man man5= new Man ("E", 5);
+		Man man6= new Man ("F", 6);
 		
 		int[] man1Prefs = {3, 4, 2, 5, 1, 6}; // these are the IDs of his preferences, in order
 		int[] man2Prefs = {2, 6, 3, 4, 5, 1};
@@ -59,12 +59,12 @@ public class GaleShapley {
 		man5.setPrefsList(man5Prefs);
 		man6.setPrefsList(man6Prefs);
 		
-		Person[] men = {man1, man2, man3, man4, man5, man6};
+		Man[] men = {man1, man2, man3, man4, man5, man6};
 		return men;
 	}
 	
 	public static void displayFromManual() {
-		Person[] men = manualMenInput();
+		Man[] men = manualMenInput();
 		Woman[] women = manualWomenInput();
 		List<List<Person>> galeShapleyOutput = galeShapley(men, women, 6);
 		for(int i = 0; i < galeShapleyOutput.size(); i++) {
@@ -82,7 +82,7 @@ public class GaleShapley {
 		Integer n = 0;
 		Integer t = 0;
 		
-		List<Person> men = new ArrayList<Person>();
+		List<Man> men = new ArrayList<Man>();
 		List<Woman> women = new ArrayList<Woman>();
 		
 		List<List<List<Person>>> galeShapleyResults = new ArrayList<List<List<Person>>>();
@@ -99,7 +99,7 @@ public class GaleShapley {
 			int menIdCounter = 1;
 			
 			for(int i = 0; i < menStringArray.length; i++) {
-				Person stringMan = new Person(menStringArray[i], menIdCounter);
+				Man stringMan = new Man(menStringArray[i], menIdCounter);
 				men.add(stringMan);
 				menIdCounter++;
 			}
@@ -153,7 +153,7 @@ public class GaleShapley {
 				women.get(i).prefsList = prefsList;
 			}
 		
-			Person[] menArray = men.toArray(new Person[men.size()]);
+			Man[] menArray = men.toArray(new Man[men.size()]);
 			Woman[] womenArray = women.toArray(new Woman[women.size()]);
 			
 			galeShapleyResults.add(galeShapley(menArray, womenArray, n));
@@ -167,14 +167,14 @@ public class GaleShapley {
 		return galeShapleyResults;
 	}
 	
-	public static List<List<Person>> galeShapley(Person[] men, Woman[] women, int n) {
+	public static List<List<Person>> galeShapley(Man[] men, Woman[] women, int n) {
 		int engagedCount = 0;
 		int exhaustedCount = 0;
 		
 		while(engagedCount < n) {
 			for(int i = 0; i < men.length; i++) {
 				
-				Person man = men[i];
+				Man man = men[i];
 						
 				if(man.currentFiance == null) {
 					
@@ -205,9 +205,10 @@ public class GaleShapley {
 			for(int j = 0; j < women.length; j++) {
 				Woman woman = women[j];
 				
-				ArrayList<Person> candidates = woman.proposals;
+				ArrayList<Man> candidates = woman.proposals;
+				
 				if(woman.currentFiance != null) {
-					candidates.add(woman.currentFiance);
+					candidates.add((Man) woman.currentFiance);
 				}
 				
 				int mostPrefIndex = woman.prefsList.length;
@@ -215,7 +216,7 @@ public class GaleShapley {
 				
 				for(int k = 0; k < candidates.size(); k++ )
 				{
-					Person man = candidates.get(k);
+					Man man = candidates.get(k);
 					for(int l = 0; l < woman.prefsList.length; l++) {
 						if(woman.prefsList[l] == man.id) {
 							if(l < mostPrefIndex) {
@@ -244,7 +245,7 @@ public class GaleShapley {
 			}
 			
 			for(int i = 0; i < women.length; i++) {
-				women[i].proposals = new ArrayList<Person>();
+				women[i].proposals = new ArrayList<Man>();
 			}
 		}
 		
