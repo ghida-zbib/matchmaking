@@ -10,6 +10,10 @@ public abstract class Person {
 		this.id = id;
 	}
 	
+	public void initializeFiance() {
+		this.currentFiance = new Nobody();
+	}
+	
 	public void setPrefsList(int[] prefs) {
 		this.prefsList = prefs;
 	}

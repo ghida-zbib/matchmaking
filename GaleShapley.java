@@ -85,6 +85,13 @@ public class GaleShapley {
 		man5.setPrefsList(man5Prefs);
 		man6.setPrefsList(man6Prefs);
 		
+		man1.initializeFiance();
+		man2.initializeFiance();
+		man3.initializeFiance();
+		man4.initializeFiance();
+		man5.initializeFiance();
+		man6.initializeFiance();
+		
 		Man[] men = {man1, man2, man3, man4, man5, man6};
 		return men;
 	}
@@ -231,12 +238,12 @@ public class GaleShapley {
 		int engagedCount = 0;
 		int exhaustedCount = 0;
 		
-		while(engagedCount < n) {
+		while(engagedCount + exhaustedCount < n) {
 			for(int i = 0; i < men.length; i++) {
 				
 				Man man = men[i];
 						
-				if(man.currentFiance == null) {
+				if(man.currentFiance.getClass() == Nobody.class) {
 					
 					/* propose to the next choice */
 					
@@ -297,7 +304,7 @@ public class GaleShapley {
 					}
 					else if(woman.currentFiance != null && mostPref != woman.currentFiance) {
 						// rejecting current fiance and accepting a new one
-						woman.currentFiance.currentFiance = null;
+						woman.currentFiance.currentFiance = new Nobody();
 						woman.currentFiance = mostPref;
 						mostPref.currentFiance = woman;
 					}
@@ -314,10 +321,11 @@ public class GaleShapley {
 		
 		for(int i = 0; i < men.length; i++) {
 			ArrayList<Person> matchRow = new ArrayList<Person>();
-			output.add(matchRow);
 			
 			matchRow.add(men[i]);
 			matchRow.add(men[i].currentFiance);
+			
+			output.add(matchRow);
 		}
 		
 		
