@@ -1,0 +1,4 @@
+
+public class deciderRunner {
+   Decider decider = new Decider("O+","O+",2,"no","Rarely",2,3);
+}

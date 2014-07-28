@@ -1,0 +1,9 @@
+package bucky;
+
+public class kk {
+  public static void main (String args[])
+  {
+	  Tuna objectName=new Tuna();
+	  objectName.simpleMessage();
+  }
+}
