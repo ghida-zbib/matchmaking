@@ -23,35 +23,35 @@ public class Decider {
 	}
 	
 	//find compatability based on blood type
-	public void stringToBlood (String firstBloodType, String secondBloodType)
+	public int stringToBlood (String firstBloodType, String secondBloodType)
 	{
 		if (firstBloodType==secondBloodType)
 		{
-			kidneyCompatability+=90;
+			return 90;
 		}
 		else if ((firstBloodType.substring(firstBloodType.length()-1))==(secondBloodType.substring(secondBloodType.length()-1)))
 		{
-			kidneyCompatability+=45;
+			return 45;
 		}
 		else if ((firstBloodType.substring(firstBloodType.length()-1)==(secondBloodType.substring(secondBloodType.length()-1))))
 		{
-			kidneyCompatability+=90;
+			return 90;
 		}
 		else if ((firstBloodType.substring(firstBloodType.length()-1)!=(secondBloodType.substring(secondBloodType.length()-1))))
 		{
-			kidneyCompatability+=45;
+			return 45;
 		}
 		else if (firstBloodType.substring(firstBloodType.length()-2, firstBloodType.length()-1)==("AB") && firstBloodType.substring(firstBloodType.length()-1)==(secondBloodType.substring(secondBloodType.length()-1)))
 		{
-			kidneyCompatability+=90;
+			return 90;
 		}
 		else if (firstBloodType.substring(firstBloodType.length()-2, firstBloodType.length()-1)==("AB") && firstBloodType.substring(firstBloodType.length()-1)!=(secondBloodType.substring(secondBloodType.length()-1)))
 		{
-			kidneyCompatability+=45;
+			return 45;
 		}
 		else
 		{
-			kidneyCompatability+=0;
+			return 10;
 		}
 	}
 	//find dietary health of donor
