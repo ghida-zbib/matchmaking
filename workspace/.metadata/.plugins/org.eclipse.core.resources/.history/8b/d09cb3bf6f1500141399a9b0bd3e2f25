@@ -1,0 +1,11 @@
+package bucky;
+
+public class Tuna {
+   public static void main (String args[])
+   {
+	   int pat=0;
+	   do {
+	   ++pat;
+	   } while (pat<10);
+   }
+}

@@ -1,0 +1,12 @@
+package bucky;
+
+import java.util.Scanner;
+
+class apples {
+   public static void main (String args[])
+   {
+	   Scanner blah=new Scanner (System.in);
+	   int firstnum=blah.nextInt();
+	   System.out.println(firstnum); 
+   }
+}

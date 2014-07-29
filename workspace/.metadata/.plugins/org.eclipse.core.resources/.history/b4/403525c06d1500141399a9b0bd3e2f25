@@ -1,0 +1,17 @@
+package bucky;
+
+class apples {
+	
+	
+	
+	public static void main	 (String args[])
+	{
+		int bucky[]={21, 1, 66, 5, 42, 41, 15};
+		int sum=0;
+		for (int i=0;i<bucky.length;i++)
+		{
+			sum+=bucky[i];
+		}
+		System.out.println(sum/bucky.length);
+	}
+}

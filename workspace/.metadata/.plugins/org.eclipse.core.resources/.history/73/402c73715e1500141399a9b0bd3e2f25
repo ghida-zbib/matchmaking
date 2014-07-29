@@ -1,0 +1,11 @@
+package bucky;
+
+class apples {
+	public static void main (String args[])
+	{
+		int two[]=new int[1];
+		two[0]=1;
+		two[1]=2;
+		System.out.println(two[0]);
+	}
+}

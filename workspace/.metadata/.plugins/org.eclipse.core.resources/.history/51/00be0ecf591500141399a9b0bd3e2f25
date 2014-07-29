@@ -1,0 +1,20 @@
+package bucky;
+
+import java.util.Scanner;
+
+class apples {
+   static double principal=10000;
+   static double rate=0.01;
+   static int looptims;
+   public static void main (String args[])
+   {
+	   Scanner whatevs=new Scanner(System.in);
+	   System.out.println("How many days are you compounding interest?");
+	   looptims=whatevs.nextInt();
+	   for (int i=0;i<looptims;i++)
+	   {
+		   principal=principal*(1+rate);
+	   }
+	   System.out.print(principal);
+   }
+}
