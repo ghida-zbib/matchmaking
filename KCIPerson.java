@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 
@@ -12,7 +13,7 @@ public class KCIPerson {
 	private Response formResponse;
 	private boolean isRecipient; // if false, then they're a donor
 	
-	private int[] preferences;
+	private Integer[] preferences;
 	
 	public KCIPerson(Response formResponse) {
 		this.formResponse = formResponse;
@@ -26,6 +27,10 @@ public class KCIPerson {
 	
 	public String getBloodType() {
 		return this.bloodType;
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 
 	public int scoreResponse(Response formResponse) {
@@ -78,7 +83,7 @@ public class KCIPerson {
 		return weightedPreference;
 	}
 	
-	public ArrayList<KCIPerson> buildPreferences(ArrayList<KCIPerson> others) {
+	public Integer[] buildPreferences(ArrayList<KCIPerson> others) {
 		
 		ArrayList<KCIPerson> result = new ArrayList<KCIPerson>();
 		
@@ -105,6 +110,16 @@ public class KCIPerson {
 			}
 		}
 		
-		return result;
+		// convert the ArrayList<KCIPerson> to an int[]
+		
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		
+		for(int i = 0; i < others.size(); i++) {
+			ids.add(others.get(id).getId());
+		}
+		
+		Integer[] prefIds = ids.toArray(new Integer[ids.size()]);
+		
+		return prefIds;
 	}
 }
