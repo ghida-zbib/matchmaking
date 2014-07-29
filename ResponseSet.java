@@ -7,6 +7,10 @@ public class ResponseSet {
 	
 	private ArrayList<Response> responses;
 	
+	public static final String NO_VEG_STRING = "None of the above";
+	public static final String VEGETARIAN_STRING = "Vegetarian";
+	public static final String VEGAN_STRING = "Vegan";
+	
 	public static final Integer NO_VEG = 0;
 	public static final Integer VEGETARIAN = 1;
 	public static final Integer VEGAN = 2;
@@ -22,6 +26,7 @@ public class ResponseSet {
 	public static final Integer MOSTLY_INT = 3;
 	
 	public static final HashMap<String, Integer> conditionsToInts = new HashMap<String, Integer>();
+	public static final HashMap<String, Integer> vegsToInts = new HashMap<String, Integer>();
 	
 	public ArrayList<Response> getResponses() {
 		return responses;
@@ -29,10 +34,16 @@ public class ResponseSet {
 	
 	public ResponseSet(String filename) throws Exception {
 		
+		responses = new ArrayList<Response>();
+		
 		conditionsToInts.put(RARELY_STRING, RARELY_INT);
 		conditionsToInts.put(SOMETIMES_STRING, SOMETIMES_INT);
 		conditionsToInts.put(OFTEN_STRING, OFTEN_INT);
 		conditionsToInts.put(MOSTLY_STRING, MOSTLY_INT);
+		
+		vegsToInts.put(NO_VEG_STRING, NO_VEG);
+		vegsToInts.put(VEGETARIAN_STRING, VEGETARIAN);
+		vegsToInts.put(VEGAN_STRING, VEGAN);
 		
 		Scanner scanner = new Scanner (new File (filename));
 		scanner.useDelimiter(",");
@@ -50,11 +61,11 @@ public class ResponseSet {
 				}
 			}
 
-			for(int i = 0; i < responses.size(); i++) {
+			for(int i = 0; i < responseStrings.size(); i++) {
 				ArrayList<String> myResponse = responseStrings.get(i);
 				Response response = new Response();
 				
-				String fastFoodString = myResponse.get(0);
+				String fastFoodString = myResponse.get(1);
 				Integer fastFood = -1;
 				
 				if(fastFoodString.indexOf("-") == -1) {
@@ -66,35 +77,24 @@ public class ResponseSet {
 				
 				response.setFastFood(fastFood);
 				
-				String vegString = myResponse.get(1);
-				if(vegString.equals("None of the above")) {
-					response.setVeg(NO_VEG);
-				}
-				else if(vegString.equals("Vegetarian")) {
-					response.setVeg(VEGETARIAN);
-				}
-				else if(vegString.equals("Vegan")) {
-					response.setVeg(VEGAN);
-				}
-				else {
-					throw new Exception("Invalid veg type");
-				}
+				String vegString = myResponse.get(2);
+				response.setVeg(vegsToInts.get(vegString));
 				
-				String oilButterString = myResponse.get(2);
+				String oilButterString = myResponse.get(3);
 				response.setOilButter(conditionsToInts.get(oilButterString));
 				
-				String eggsString = myResponse.get(3);
+				String eggsString = myResponse.get(4);
 				response.setEggs(conditionsToInts.get(eggsString));
 				
-				String dessertsString = myResponse.get(4);
+				String dessertsString = myResponse.get(5);
 				response.setDesserts(conditionsToInts.get(dessertsString));
 				
-				String bloodTypeString = myResponse.get(5);
+				String bloodTypeString = myResponse.get(6);
 				response.setBloodType(bloodTypeString);
 				
 				/* TODO: randomize the Unknown blood types */
 				
-				String name = myResponse.get(6);
+				String name = myResponse.get(7);
 				response.setName(name);
 				
 				responses.add(response);
