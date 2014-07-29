@@ -24,14 +24,13 @@ public class KCIPerson {
 		return result;
 	}
 	
-	public static void main (String[] args) {
-		Response response = new Response();
-		response.setFastFood(8);
-		response.setVeg(ResponseSet.NO_VEG);
-		response.setEggs(ResponseSet.SOMETIMES_INT);
-		response.setDesserts(ResponseSet.OFTEN_INT);
-		response.setOilButter(ResponseSet.SOMETIMES_INT);
+	public static void main (String[] args) throws Exception {
+		ResponseSet responseSet = new ResponseSet("src/scitech.csv");
 		
-		System.out.println(scoreResponse(response));
+		for(int i = 0; i < responseSet.getResponses().size(); i++) {
+			Response formResponse = responseSet.getResponses().get(i);
+			System.out.println(scoreResponse(formResponse));
+		}
+	
 	}
 }

@@ -23,6 +23,10 @@ public class ResponseSet {
 	
 	public static final HashMap<String, Integer> conditionsToInts = new HashMap<String, Integer>();
 	
+	public ArrayList<Response> getResponses() {
+		return responses;
+	}
+	
 	public ResponseSet(String filename) throws Exception {
 		
 		conditionsToInts.put(RARELY_STRING, RARELY_INT);
@@ -30,7 +34,7 @@ public class ResponseSet {
 		conditionsToInts.put(OFTEN_STRING, OFTEN_INT);
 		conditionsToInts.put(MOSTLY_STRING, MOSTLY_INT);
 		
-		Scanner scanner = new Scanner (new File ("Placeholder for name"));
+		Scanner scanner = new Scanner (new File (filename));
 		scanner.useDelimiter(",");
 		ArrayList<ArrayList<String>> responseStrings = new ArrayList<ArrayList<String>>();
 		ArrayList<String> currentResponse=new ArrayList<String>();
