@@ -3,15 +3,15 @@ public class Decider {
 	static String firstBloodType; //Recipient Blood type
 	static String secondBloodType; //Donor Blood Type
 	static int fastFood; //amount of fast food eaten
-	static String vegetarianOrVegan; //Vegan or vegetarian?
-	static String oilAndButter; //amount of oil
+	static int vegetarianOrVegan; //Vegan or vegetarian?
+	static int oilAndButter; //amount of oil
 	static int eggs; //how many eggs per week
 	static int highFatDesserts; //how many fat desserts per week
 	
 	static int kidneyCompatability=0; //FINAL RETURNED INT, HIGHER NUMBER=MORE COMPATABLE
 	
 	//((((IMPORTANT)))) CONSTRUCTOR TAKES INPUTS IN ORDER
-	public Decider (String DonorBlood, String RecipientBlood, int amountFastFood, String vegOrVeg, String oAndB, int huevos, int fatDesserts)
+	public Decider (String DonorBlood, String RecipientBlood, int amountFastFood, int vegOrVeg, int oAndB, int huevos, int fatDesserts)
 	{
 		firstBloodType=DonorBlood;
 		secondBloodType=RecipientBlood;
@@ -78,13 +78,13 @@ public class Decider {
 			return -7;
 		}
 	}
-	public int vegeIndex (String vegetarianOrVegan)
+	public int vegeIndex (int vegetarianOrVegan)
 	{
-		if (vegetarianOrVegan.equals("Vegatarian") || vegetarianOrVegan.equals("vegatarian"))
+		if (vegetarianOrVegan == ResponseSet.VEGETARIAN)
 		{
 			return 8;
 		}
-		else if (vegetarianOrVegan.equals("Vegan") || vegetarianOrVegan.equals("vegan"))
+		else if (vegetarianOrVegan == ResponseSet.VEGAN)
 		{
 			return 9;
 		}
@@ -93,17 +93,17 @@ public class Decider {
 			return 0;
 		}
 	}
-	public int oilAndButterIndex (String oilAndButter)
+	public int oilAndButterIndex (int oilAndButter)
 	{
-		if (oilAndButter.equals("Rarely") || oilAndButter.equals("rarely"))
+		if (oilAndButter == ResponseSet.RARELY_INT)
 		{
 			return 3;
 		}
-		if (oilAndButter.equals("Sometimes") || oilAndButter.equals("sometimes"))
+		if (oilAndButter == ResponseSet.SOMETIMES_INT)
 		{
 			return 0;
 		}
-		if (oilAndButter.equals("Often") || oilAndButter.equals("often"))
+		if (oilAndButter == ResponseSet.OFTEN_INT)
 		{
 			return -3;
 		}
@@ -114,15 +114,15 @@ public class Decider {
 	}
 	public int eggsIndex (int eggs)
 	{
-		if (eggs==0)
+		if (eggs == ResponseSet.RARELY_INT)
 		{
 			return 2;
 		}
-		else if ((eggs>=1) && (eggs<=4))
+		else if (eggs == ResponseSet.SOMETIMES_INT)
 		{
 			return 0;
 		}
-		else if ((eggs>=5) && (eggs<=8))
+		else if (eggs == ResponseSet.OFTEN_INT)
 		{
 			return -2;
 		}
@@ -134,15 +134,15 @@ public class Decider {
 	
 	public int highFatDessertsIndex (int highFatDesserts)
 	{
-		if (highFatDesserts==0)
+		if (highFatDesserts == ResponseSet.RARELY_INT)
 		{
 			return 0;
 		}
-		else if ((highFatDesserts>=1) && (highFatDesserts<=3))
+		else if (highFatDesserts == ResponseSet.SOMETIMES_INT)
 		{
 			return -2;
 		}
-		else if ((highFatDesserts>=4) && (highFatDesserts<=6))
+		else if (highFatDesserts == ResponseSet.OFTEN_INT)
 		{
 			return -4;
 		}

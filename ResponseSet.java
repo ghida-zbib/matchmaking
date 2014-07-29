@@ -7,21 +7,21 @@ public class ResponseSet {
 	
 	private ArrayList<Response> responses;
 	
-	private static final Integer NO_VEG = 0;
-	private static final Integer VEGETARIAN = 1;
-	private static final Integer VEGAN = 2;
+	public static final Integer NO_VEG = 0;
+	public static final Integer VEGETARIAN = 1;
+	public static final Integer VEGAN = 2;
 	
-	private static final String RARELY_STRING = "Rarely";
-	private static final String SOMETIMES_STRING = "Sometimes";
-	private static final String OFTEN_STRING = "Often";
-	private static final String MOSTLY_STRING = "Most of the time";
+	public static final String RARELY_STRING = "Rarely";
+	public static final String SOMETIMES_STRING = "Sometimes";
+	public static final String OFTEN_STRING = "Often";
+	public static final String MOSTLY_STRING = "Most of the time";
 	
-	private static final Integer RARELY_INT = 0;
-	private static final Integer SOMETIMES_INT = 1;
-	private static final Integer OFTEN_INT = 2;
-	private static final Integer MOSTLY_INT = 3;
+	public static final Integer RARELY_INT = 0;
+	public static final Integer SOMETIMES_INT = 1;
+	public static final Integer OFTEN_INT = 2;
+	public static final Integer MOSTLY_INT = 3;
 	
-	private static final HashMap<String, Integer> conditionsToInts = new HashMap<String, Integer>();
+	public static final HashMap<String, Integer> conditionsToInts = new HashMap<String, Integer>();
 	
 	public ResponseSet(String filename) throws Exception {
 		
