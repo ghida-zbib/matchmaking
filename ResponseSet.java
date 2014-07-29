@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -32,7 +33,7 @@ public class ResponseSet {
 		return responses;
 	}
 	
-	public ResponseSet(String filename) throws Exception {
+	public ResponseSet(String filename) throws FileNotFoundException{
 		
 		responses = new ArrayList<Response>();
 		

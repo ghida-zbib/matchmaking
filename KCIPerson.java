@@ -6,7 +6,6 @@ import java.util.Collections;
 public class KCIPerson {
 	private int id;
 	
-	private static final Response response = null;
 	private String bloodType;
 	private int healthIndex;
 	
@@ -15,10 +14,11 @@ public class KCIPerson {
 	
 	private Integer[] preferences;
 	
-	public KCIPerson(Response formResponse) {
+	public KCIPerson(Response formResponse, int id) {
 		this.formResponse = formResponse;
 		this.bloodType = formResponse.getBloodType();
 		this.healthIndex = scoreResponse(formResponse);
+		this.id = id;
 	}
 	
 	public int getHealthIndex() {
