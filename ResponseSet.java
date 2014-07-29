@@ -49,7 +49,18 @@ public class ResponseSet {
 			for(int i = 0; i < responses.size(); i++) {
 				ArrayList<String> myResponse = responseStrings.get(i);
 				Response response = new Response();
-				response.setFastFood(Integer.parseInt(myResponse.get(0)));
+				
+				String fastFoodString = myResponse.get(0);
+				Integer fastFood = -1;
+				
+				if(fastFoodString.indexOf("-") == -1) {
+					fastFood = Integer.parseInt(fastFoodString.replace("+", ""));
+				}
+				else {
+					fastFood = Integer.parseInt(fastFoodString.substring(0, 1));
+				}
+				
+				response.setFastFood(fastFood);
 				
 				String vegString = myResponse.get(1);
 				if(vegString.equals("None of the above")) {
