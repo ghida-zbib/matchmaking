@@ -7,6 +7,10 @@ public class Response {
 	private int eggs;
 	private int desserts;
 	
+	public String getBloodType() {
+		return bloodType;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -34,4 +38,5 @@ public class Response {
 	public void setDesserts(int desserts) {
 		this.desserts = desserts;
 	}
+
 }
