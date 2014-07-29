@@ -11,6 +11,26 @@ public class Response {
 		return bloodType;
 	}
 	
+	public int getFastFood() {
+		return fastFood;
+	}
+	
+	public int getVeg() {
+		return veg;
+	}
+	
+	public int getOilAndButter() {
+		return oilButter;
+	}
+	
+	public int getEggs() {
+		return eggs;
+	}
+	
+	public int getDesserts() {
+		return desserts;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
