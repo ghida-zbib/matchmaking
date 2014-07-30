@@ -121,7 +121,7 @@ public class KCIPerson {
 			
 			for(int j = 0; j < others.size(); j++) {
 				double personPref = weightedPref(others.get(j));
-				if(personPref == preference) {
+				if(personPref == preference && result.indexOf(others.get(j)) == -1) {
 					result.add(others.get(j));
 					break;
 				}
