@@ -275,7 +275,7 @@ public class GaleShapley {
 				
 				ArrayList<Man> candidates = woman.proposals;
 				
-				if(woman.currentFiance != null) {
+				if(woman.currentFiance.getClass() != Nobody.class) {
 					candidates.add((Man) woman.currentFiance);
 				}
 				

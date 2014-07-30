@@ -11,6 +11,7 @@ public class KidneyRunner {
 			KCIPerson recipient = recipients.get(i);
 			Man man = new Man(recipient.getFormResponse().getName(), recipient.getId());
 			man.setPrefsList(recipient.getPreferences());
+			man.initializeFiance();
 			men[i] = man;
 		}
 		return men;
@@ -22,6 +23,7 @@ public class KidneyRunner {
 			KCIPerson donor = donors.get(i);
 			Woman woman = new Woman(donor.getFormResponse().getName(), donor.getId());
 			woman.setPrefsList(donor.getPreferences());
+			woman.initializeFiance();
 			women[i] = woman;
 		}
 		return women;
@@ -72,11 +74,13 @@ public class KidneyRunner {
 			ArrayList<KCIPerson> recipients = splitLists.get(1);
 			
 			for(int i = 0; i < donors.size(); i++) {
-				donors.get(i).buildPreferences(recipients);
+				KCIPerson donor = donors.get(i);
+				donor.setPreferences(donor.buildPreferences(recipients));
 			}
 			
 			for(int i = 0; i < recipients.size(); i++) {
-				recipients.get(i).buildPreferences(donors);
+				KCIPerson recipient = recipients.get(i);
+				recipient.setPreferences(recipient.buildPreferences(donors));
 			}
 			
 			Man[] men = convertRecipients(recipients);
@@ -95,6 +99,6 @@ public class KidneyRunner {
 	
 	public static void main(String[] args) {
 		KidneyRunner kr = new KidneyRunner();
-		kr.runFromCSV("src/KCI_Tests[5PeopleWith1Tests.txt");
+		kr.runFromCSV("/Users/dev/results.csv");
 	}
 }

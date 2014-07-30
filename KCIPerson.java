@@ -95,6 +95,10 @@ public class KCIPerson {
 		return weightedPreference;
 	}
 	
+	public void setPreferences(Integer[] preferences) {
+		this.preferences = preferences;
+	}
+	
 	public Integer[] buildPreferences(ArrayList<KCIPerson> others) {
 		
 		ArrayList<KCIPerson> result = new ArrayList<KCIPerson>();
@@ -127,7 +131,7 @@ public class KCIPerson {
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		
 		for(int i = 0; i < others.size(); i++) {
-			ids.add(others.get(id).getId());
+			ids.add(others.get(i).getId());
 		}
 		
 		Integer[] prefIds = ids.toArray(new Integer[ids.size()]);
