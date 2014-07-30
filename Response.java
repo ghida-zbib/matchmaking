@@ -7,6 +7,10 @@ public class Response {
 	private int eggs;
 	private int desserts;
 	
+	public String getName() {
+		return this.name;
+	}
+	
 	public String getBloodType() {
 		return bloodType;
 	}

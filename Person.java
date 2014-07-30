@@ -17,4 +17,8 @@ public abstract class Person {
 	public void setPrefsList(int[] prefs) {
 		this.prefsList = prefs;
 	}
+
+	public String getName() {
+		return this.name;
+	}
 }

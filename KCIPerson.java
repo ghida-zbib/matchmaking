@@ -29,6 +29,18 @@ public class KCIPerson {
 		return this.bloodType;
 	}
 	
+	public Response getFormResponse() {
+		return this.formResponse;
+	}
+	
+	public int[] getPreferences() {
+		int[] result = new int[this.preferences.length];
+		for(int i = 0; i < this.preferences.length; i++) {
+			result[i] = (int) this.preferences[i];
+		}
+		return result;
+	}
+	
 	public int getId() {
 		return this.id;
 	}
