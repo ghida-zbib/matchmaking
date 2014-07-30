@@ -234,15 +234,15 @@ public class GaleShapley {
 		return galeShapleyResults;
 	}
 	
-	public static List<List<Person>> galeShapley(Man[] men, Woman[] women, int n) {
+	public static List<List<Person>> galeShapley(Man[] men, Woman[] women, int n) {		
 		int engagedCount = 0;
 		int exhaustedCount = 0;
 		
-		System.out.println(String.format("n %d", n));
-		
 		while(engagedCount + exhaustedCount < n) {
-			System.out.println(String.format("engaged count %d", engagedCount));
-			System.out.println(String.format("exhausted count %d", exhaustedCount));
+			
+			System.out.println(String.format("engaged count: %d", engagedCount));
+			System.out.println(String.format("exhausted count: %d", exhaustedCount));
+			
 			for(int i = 0; i < men.length; i++) {
 				
 				Man man = men[i];
@@ -254,7 +254,9 @@ public class GaleShapley {
 					Woman nextChoiceWoman = null; // blank Woman object
 					
 					for(int j = 0; j < women.length; j++) {
-						if(women[j].id == man.prefsList[man.nextChoice]) {
+						Woman woman = women[j];
+						int nextChoiceId = man.prefsList[man.nextChoice];
+						if(woman.id == nextChoiceId) {
 							nextChoiceWoman = women[j];
 							break;
 						}
@@ -300,13 +302,13 @@ public class GaleShapley {
 				}
 				
 				if(mostPref != null) {
-					if(woman.currentFiance == null) {
+					if(woman.currentFiance.getClass() == Nobody.class) {
 						// accepting for the first time
 						engagedCount++;
 						woman.currentFiance = mostPref;
 						mostPref.currentFiance = woman;
 					}
-					else if(woman.currentFiance != null && mostPref != woman.currentFiance) {
+					else if(woman.currentFiance.getClass() != Nobody.class  && mostPref != woman.currentFiance) {
 						// rejecting current fiance and accepting a new one
 						woman.currentFiance.currentFiance = new Nobody();
 						woman.currentFiance = mostPref;

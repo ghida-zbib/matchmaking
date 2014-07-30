@@ -21,6 +21,10 @@ public class KCIPerson {
 		this.id = id;
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public int getHealthIndex() {
 		return this.healthIndex;
 	}
@@ -57,27 +61,27 @@ public class KCIPerson {
 	}
 	
 	private int bloodCompatibility(String firstBloodType, String secondBloodType) {
-		if (firstBloodType==secondBloodType)
+		if (firstBloodType.equals(secondBloodType))
 		{
 			return 90;
 		}
-		else if ((firstBloodType.substring(firstBloodType.length()-1))==(secondBloodType.substring(secondBloodType.length()-1)))
+		else if ((firstBloodType.substring(firstBloodType.length()-1)).equals(secondBloodType.substring(secondBloodType.length()-1)))
 		{
 			return 45;
 		}
-		else if ((firstBloodType.substring(firstBloodType.length()-1)==(secondBloodType.substring(secondBloodType.length()-1))))
+		else if ((firstBloodType.substring(firstBloodType.length()-1).equals(secondBloodType.substring(secondBloodType.length()-1))))
 		{
 			return 90;
 		}
-		else if ((firstBloodType.substring(firstBloodType.length()-1)!=(secondBloodType.substring(secondBloodType.length()-1))))
+		else if (!(firstBloodType.substring(firstBloodType.length()-1).equals(secondBloodType.substring(secondBloodType.length()-1))))
 		{
 			return 45;
 		}
-		else if (firstBloodType.substring(firstBloodType.length()-2, firstBloodType.length()-1)==("AB") && firstBloodType.substring(firstBloodType.length()-1)==(secondBloodType.substring(secondBloodType.length()-1)))
+		else if (firstBloodType.substring(firstBloodType.length()-2, firstBloodType.length()-1).equals("AB") && firstBloodType.substring(firstBloodType.length()-1).equals(secondBloodType.substring(secondBloodType.length()-1)))
 		{
 			return 90;
 		}
-		else if (firstBloodType.substring(firstBloodType.length()-2, firstBloodType.length()-1)==("AB") && firstBloodType.substring(firstBloodType.length()-1)!=(secondBloodType.substring(secondBloodType.length()-1)))
+		else if (firstBloodType.substring(firstBloodType.length()-2, firstBloodType.length()-1).equals("AB") && !(firstBloodType.substring(firstBloodType.length()-1).equals(secondBloodType.substring(secondBloodType.length()-1))))
 		{
 			return 45;
 		}
@@ -88,9 +92,12 @@ public class KCIPerson {
 	}
 	
 	public Double weightedPref(KCIPerson person) {
-		int personHealthIndex = person.getHealthIndex();
+		// int personHealthIndex = person.getHealthIndex();
+		int personHealthIndex = 10;
 		int kidneyCompatibility = bloodCompatibility(this.bloodType, person.getBloodType());
 		Double weightedPreference = 0.6*kidneyCompatibility + 0.4*personHealthIndex;
+		
+		System.out.println(String.format("%s's preference for %s is %f", this.getFormResponse().getName(), person.getFormResponse().getName(), weightedPreference));
 		
 		return weightedPreference;
 	}
@@ -121,7 +128,7 @@ public class KCIPerson {
 			
 			for(int j = 0; j < others.size(); j++) {
 				double personPref = weightedPref(others.get(j));
-				if(personPref == preference && result.indexOf(others.get(j)) == -1) {
+				if(personPref == preference && result.indexOf(others.get(j)) < 0) {
 					result.add(others.get(j));
 					break;
 				}

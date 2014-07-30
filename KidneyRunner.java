@@ -4,6 +4,8 @@ import java.util.List;
 
 
 public class KidneyRunner {
+	
+	private static int RECIPIENT_COUNT;
 
 	public Man[] convertRecipients(ArrayList<KCIPerson> recipients) {
 		Man[] men = new Man[recipients.size()];
@@ -73,8 +75,11 @@ public class KidneyRunner {
 			ArrayList<KCIPerson> donors = splitLists.get(0);
 			ArrayList<KCIPerson> recipients = splitLists.get(1);
 			
+			RECIPIENT_COUNT = recipients.size();
+			
 			for(int i = 0; i < donors.size(); i++) {
 				KCIPerson donor = donors.get(i);
+				donor.setId(donor.getId() - RECIPIENT_COUNT);
 				donor.setPreferences(donor.buildPreferences(recipients));
 			}
 			
@@ -86,7 +91,23 @@ public class KidneyRunner {
 			Man[] men = convertRecipients(recipients);
 			Woman[] women = convertDonors(donors);
 			
-			List<List<Person>> output = GaleShapley.galeShapley(men, women, women.length);
+			for(int i = 0; i < men.length; i++) {
+				System.out.println(String.format("%s preference list: ", men[i].getName()));
+				for(int j = 0; j < men[i].prefsList.length; j++) {
+					System.out.print(((Integer) men[i].prefsList[j]).toString() + " ");	
+				}
+				System.out.print("\n");
+			}
+			
+			for(int i = 0; i < women.length; i++) {
+				System.out.println(String.format("%s preference list: ", women[i].getName()));
+				for(int j = 0; j < women[i].prefsList.length; j++) {
+					System.out.print(((Integer) women[i].prefsList[j]).toString() + " ");	
+				}
+				System.out.print("\n");
+			}
+			
+			List<List<Person>> output = GaleShapley.galeShapley(men, women, men.length);
 			for(int i = 0; i < output.size(); i++) {
 				List<Person> row = output.get(i);
 				System.out.println(row.get(0).getName() + " is matched with " + row.get(1).getName());
