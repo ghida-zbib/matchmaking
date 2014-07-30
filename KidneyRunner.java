@@ -92,4 +92,9 @@ public class KidneyRunner {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void main(String[] args) {
+		KidneyRunner kr = new KidneyRunner();
+		kr.runFromCSV("src/KCI_Tests[5PeopleWith1Tests.txt");
+	}
 }

@@ -1,0 +1,6 @@
+1,B+,Sometimes,Vegetarian,Most of the time,Sometimes,1-3
+1,A+,Often,None of the above,Sometimes,Often,4-6
+1,B+,Rarely,Vegetarian,Often,Sometimes,10+
+1,O-,Most of the time,None of the above,Often,Rarely,10+
+1,O-,Most of the time,Vegetarian,Rarely,Most of the time,1-3
+
