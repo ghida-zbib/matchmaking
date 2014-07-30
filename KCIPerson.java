@@ -120,8 +120,10 @@ public class KCIPerson {
 			Double preference = preferenceList.get(i);
 			
 			for(int j = 0; j < others.size(); j++) {
-				if(weightedPref(others.get(j)) == preference) {
+				double personPref = weightedPref(others.get(j));
+				if(personPref == preference) {
 					result.add(others.get(j));
+					break;
 				}
 			}
 		}
@@ -130,8 +132,8 @@ public class KCIPerson {
 		
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		
-		for(int i = 0; i < others.size(); i++) {
-			ids.add(others.get(i).getId());
+		for(int i = 0; i < result.size(); i++) {
+			ids.add(result.get(i).getId());
 		}
 		
 		Integer[] prefIds = ids.toArray(new Integer[ids.size()]);

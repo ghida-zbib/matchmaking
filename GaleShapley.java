@@ -238,7 +238,11 @@ public class GaleShapley {
 		int engagedCount = 0;
 		int exhaustedCount = 0;
 		
+		System.out.println(String.format("n %d", n));
+		
 		while(engagedCount + exhaustedCount < n) {
+			System.out.println(String.format("engaged count %d", engagedCount));
+			System.out.println(String.format("exhausted count %d", exhaustedCount));
 			for(int i = 0; i < men.length; i++) {
 				
 				Man man = men[i];
