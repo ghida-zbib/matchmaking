@@ -120,6 +120,6 @@ public class KidneyRunner {
 	
 	public static void main(String[] args) {
 		KidneyRunner kr = new KidneyRunner();
-		kr.runFromCSV("/Users/dev/results.csv");
+		kr.runFromCSV("/Users/dev/finalResults.csv");
 	}
 }

@@ -92,8 +92,7 @@ public class KCIPerson {
 	}
 	
 	public Double weightedPref(KCIPerson person) {
-		// int personHealthIndex = person.getHealthIndex();
-		int personHealthIndex = 10;
+		int personHealthIndex = person.getHealthIndex();
 		int kidneyCompatibility = bloodCompatibility(this.bloodType, person.getBloodType());
 		Double weightedPreference = 0.6*kidneyCompatibility + 0.4*personHealthIndex;
 		
