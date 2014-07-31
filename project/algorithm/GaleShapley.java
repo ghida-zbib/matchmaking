@@ -172,18 +172,25 @@ public class GaleShapley {
 		Integer n = 0;
 		Integer t = 0;
 		
-		List<Man> men = new ArrayList<Man>();
-		List<Woman> women = new ArrayList<Woman>();
-		
 		List<List<List<Person>>> galeShapleyResults = new ArrayList<List<List<Person>>>();
+		
+		int lineNumber = 0;
 		
 		n = Integer.parseInt(buffReader.readLine());
 		t = Integer.parseInt(buffReader.readLine());
 		
+		lineNumber++;
+		lineNumber++;
+		
 		for(int q = 0; q < t; q++) { 
+			
+			List<Man> men = new ArrayList<Man>();
+			List<Woman> women = new ArrayList<Woman>();
+			
 			System.out.println(String.format("We are now on test %d", q));
 			
 			String menString = buffReader.readLine();
+			lineNumber++;
 			String[] menStringArray = menString.split(" ");
 			
 			int menIdCounter = 1;
@@ -196,6 +203,7 @@ public class GaleShapley {
 			}
 			
 			String womenString = buffReader.readLine();
+			lineNumber++;
 			String[] womenStringArray = womenString.split(" ");
 			
 			int womenIdCounter = 1;
@@ -209,6 +217,7 @@ public class GaleShapley {
 			
 			for(int i = 0; i < men.size(); i++) {
 				String manPrefsString = buffReader.readLine();
+				lineNumber++;
 				String[] splitPrefs = manPrefsString.split(" ");
 				
 				List<Integer> prefsList = new ArrayList<Integer>();
@@ -228,6 +237,7 @@ public class GaleShapley {
 			
 			for(int i = 0; i < women.size(); i++) {
 				String womanPrefsString = buffReader.readLine();
+				lineNumber++;
 				String[] splitPrefs = womanPrefsString.split(" ");
 				
 				List<Integer> prefs = new ArrayList<Integer>();
