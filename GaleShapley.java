@@ -34,6 +34,11 @@ public class GaleShapley {
 		woman6.setPrefsList(woman6Prefs);
 		
 		Woman[] women = {woman1, woman2, woman3, woman4, woman5, woman6};
+		
+		for(Woman woman : women) {
+			woman.initializeFiance();
+		}
+		
 		return women;
 	}
 	
@@ -60,6 +65,11 @@ public class GaleShapley {
 		woman6.setPrefsList(woman6Prefs);
 		
 		Woman[] women = {woman1, woman2, woman3, woman4, woman5, woman6};
+		
+		for(Woman woman : women) {
+			woman.initializeFiance();
+		}
+		
 		return women;
 	}
 	
@@ -93,6 +103,11 @@ public class GaleShapley {
 		man6.initializeFiance();
 		
 		Man[] men = {man1, man2, man3, man4, man5, man6};
+		
+		for(Man man : men) {
+			man.initializeFiance();
+		}
+		
 		return men;
 	}
 	
@@ -101,8 +116,8 @@ public class GaleShapley {
 		Man man2 = new Man("B", 2);
 		Man man3 = new Man("C", 3);
 		Man man4 = new Man ("D", 4);
-		Man man5= new Man ("E", 5);
-		Man man6= new Man ("F", 6);
+		Man man5 = new Man ("E", 5);
+		Man man6 = new Man ("F", 6);
 		
 		int[] man1Prefs = {3, 4, 2, 5, 1, 6}; // these are the IDs of his preferences, in order
 		int[] man2Prefs = {2, 6, 3, 4, 5, 1};
@@ -119,6 +134,11 @@ public class GaleShapley {
 		man6.setPrefsList(man6Prefs);
 		
 		Man[] men = {man1, man2, man3, man4, man5, man6};
+		
+		for(Man man : men) {
+			man.initializeFiance();
+		}
+		
 		return men;
 	}
 	
@@ -353,28 +373,14 @@ public class GaleShapley {
 	
 	public static void main(String[] args) {
 		/*
-		try {
-			
-			List<List<List<Person>>> fileGaleShapley = runFromFile();
-			for(int i = 0; i < fileGaleShapley.size(); i++) {
-				List<List<Person>> galeShapley = fileGaleShapley.get(i);
-				displayResults(galeShapley);
-				if(Verifier.verify(galeShapley)) {
-					System.out.println("Passed test - stable");
-				}
-				else {
-					System.out.println("Failed test - unstable");
-				}
-			}
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch(IOException e2) {
-			e2.printStackTrace();
+		List<List<Person>> galeShapleyOutput = galeShapley(manualIncompleteMenInput(), manualIncompleteWomenInput(), 6);
+		if(Verifier.verify(galeShapleyOutput)) {
+			System.out.println("Passed test - stable");
 		}
-		
-			*/
-			
-	displayFromIncompleteManual();
+		else {
+			System.out.println("Failed test - unstable");
+		} */
+		displayFromIncompleteManual();
 	}
 	
 }
