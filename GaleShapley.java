@@ -162,7 +162,7 @@ public class GaleShapley {
 	
 	public static List<List<List<Person>>> runFromFile() throws NumberFormatException, IOException {
 		long startTime = System.nanoTime();
-		File inputFile = new File("src/matchTests[60x60With1Tests.txt");
+		File inputFile = new File("src/matchTests[5x5With2Tests.txt");
 		FileReader inReader = new FileReader(inputFile);
 		BufferedReader buffReader = new BufferedReader(inReader);
 		
@@ -177,7 +177,7 @@ public class GaleShapley {
 		n = Integer.parseInt(buffReader.readLine());
 		t = Integer.parseInt(buffReader.readLine());
 		
-		for(int q = 0; q < 1; q++) { 
+		for(int q = 0; q < t; q++) { 
 			System.out.println(String.format("We are now on test %d", q));
 			
 			String menString = buffReader.readLine();
@@ -187,6 +187,7 @@ public class GaleShapley {
 			
 			for(int i = 0; i < menStringArray.length; i++) {
 				Man stringMan = new Man(menStringArray[i], menIdCounter);
+				stringMan.initializeFiance();
 				men.add(stringMan);
 				menIdCounter++;
 			}
@@ -198,6 +199,7 @@ public class GaleShapley {
 			
 			for(int i = 0; i < womenStringArray.length; i++) {
 				Woman stringWoman = new Woman(womenStringArray[i], womenIdCounter);
+				stringWoman.initializeFiance();
 				women.add(stringWoman);
 				womenIdCounter++;
 			}
@@ -371,7 +373,7 @@ public class GaleShapley {
 		return String.format("matchTests[%dx%dWith%dTests.txt", n, n, t);
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		/*
 		List<List<Person>> galeShapleyOutput = galeShapley(manualIncompleteMenInput(), manualIncompleteWomenInput(), 6);
 		if(Verifier.verify(galeShapleyOutput)) {
@@ -380,7 +382,9 @@ public class GaleShapley {
 		else {
 			System.out.println("Failed test - unstable");
 		} */
-		displayFromIncompleteManual();
+		// displayFromIncompleteManual();
+		System.out.println(Verifier.verify(runFromFile().get(0)));
+		System.out.println(Verifier.verify(runFromFile().get(1)));
 	}
 	
 }
