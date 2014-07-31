@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
 
+import project.algorithm.Nobody;
 import project.algorithm.Person;
 import project.algorithm.Woman;
 
@@ -39,17 +40,29 @@ public class Verifier {
 
 		for(int i = 0; i < matches.size(); i++) {
 			men.add(matches.get(i).get(0));
-			women.add((Woman) matches.get(i).get(1));
+			if(matches.get(i).get(1).getClass() != Nobody.class) {
+				women.add((Woman) matches.get(i).get(1));
+			}
 		}
 
 		for(int i = 0; i < matches.size(); i++) {
 			Person matchMan = matches.get(i).get(0);
-			Woman matchWoman = (Woman) matches.get(i).get(1);
-
-			/* check the rank of the woman in the man's preference list */
-
-			int womanIndex = indexManPref(matchMan, matchWoman);
-
+			
+			int womanIndex;
+			
+			if(matches.get(i).get(1).getClass() != Nobody.class) {
+				Woman matchWoman = (Woman) matches.get(i).get(1);
+	
+				/* check the rank of the woman in the man's preference list */
+	
+				womanIndex = indexManPref(matchMan, matchWoman);
+	
+			}
+			else {
+				
+				womanIndex = matchMan.getPrefsList().length;
+				
+			}
 			/* for each woman above the woman in the list, check if the man is ranked higher
 				in her list than her current match */
 
@@ -64,7 +77,7 @@ public class Verifier {
 
 						/* if the index of the man is greater than the index of the fiance, we have a blocking pair */
 
-						if(manIndex < fianceIndex) {
+						if(manIndex < fianceIndex && manIndex != -1 && fianceIndex != -1) {
 							isStable = false;
 						}
 					}
