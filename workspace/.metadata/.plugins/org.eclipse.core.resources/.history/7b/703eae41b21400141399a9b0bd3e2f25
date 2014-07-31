@@ -1,8 +1,0 @@
-package bucky;
-
-public class Tuna {
-   public String helloThere (String name)
-   {
-	   return ("Hello" + name);
-   }
-}
