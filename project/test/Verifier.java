@@ -10,8 +10,8 @@ public class Verifier {
 	
 	private static int indexManPref(Person man, Woman woman) {
 		/* indexes a man's preference towards a woman */
-		for(int i = 0; i < man.prefsList.length; i++) {
-			if(man.prefsList[i] == woman.id) {
+		for(int i = 0; i < man.getPrefsList().length; i++) {
+			if(man.getPrefsList()[i] == woman.getId()) {
 				return i;
 			}
 		}
@@ -20,8 +20,8 @@ public class Verifier {
 	
 	private static int indexWomanPref(Person man, Woman woman) {
 		/* indexes a woman's preference towards a man */
-		for(int i = 0; i < woman.prefsList.length; i++) {
-			if(woman.prefsList[i] == woman.id){
+		for(int i = 0; i < woman.getPrefsList().length; i++) {
+			if(woman.getPrefsList()[i] == woman.getId()){
 				return i;
 			}
 		}
@@ -54,13 +54,13 @@ public class Verifier {
 				in her list than her current match */
 
 			for(int j = 0; j < womanIndex; j++) {
-				int womanId = matchMan.prefsList[j];
+				int womanId = matchMan.getPrefsList()[j];
 				for(int k = 0; k < women.size(); k++) {
-					if(women.get(k).id == womanId) {
+					if(women.get(k).getId() == womanId) {
 						Woman woman = women.get(k);
 
 						int manIndex = indexWomanPref(matchMan, woman);
-						int fianceIndex = indexWomanPref(woman.currentFiance, woman);
+						int fianceIndex = indexWomanPref(woman.getCurrentFiance(), woman);
 
 						/* if the index of the man is greater than the index of the fiance, we have a blocking pair */
 

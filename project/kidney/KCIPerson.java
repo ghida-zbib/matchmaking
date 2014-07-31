@@ -49,7 +49,7 @@ public class KCIPerson {
 	}
 	
 	public int getId() {
-		return this.id;
+		return this.getId();
 	}
 
 	public int scoreResponse(Response formResponse) {

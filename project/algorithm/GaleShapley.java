@@ -223,7 +223,7 @@ public class GaleShapley {
 					prefs[j] = prefsList.get(j);
 				}
 				
-				men.get(i).prefsList = prefs;
+				men.get(i).setPrefsList(prefs);
 			}
 			
 			for(int i = 0; i < women.size(); i++) {
@@ -242,7 +242,7 @@ public class GaleShapley {
 					prefsList[j] = prefs.get(j);
 				}
 				
-				women.get(i).prefsList = prefsList;
+				women.get(i).setPrefsList(prefsList);
 			}
 		
 			Man[] menArray = men.toArray(new Man[men.size()]);
@@ -272,7 +272,7 @@ public class GaleShapley {
 				
 				Man man = men[i];
 						
-				if(man.currentFiance.getClass() == Nobody.class) {
+				if(man.getCurrentFiance().getClass() == Nobody.class) {
 					
 					/* propose to the next choice */
 					
@@ -280,8 +280,8 @@ public class GaleShapley {
 					
 					for(int j = 0; j < women.length; j++) {
 						Woman woman = women[j];
-						int nextChoiceId = man.prefsList[man.nextChoice];
-						if(woman.id == nextChoiceId) {
+						int nextChoiceId = man.getPrefsList()[man.nextChoice];
+						if(woman.getId() == nextChoiceId) {
 							nextChoiceWoman = women[j];
 							break;
 						}
@@ -289,13 +289,13 @@ public class GaleShapley {
 				
 					nextChoiceWoman.proposals.add(man);
 					assert man.nextChoice < n-1;
-					if(man.nextChoice < man.prefsList.length-1) {
+					if(man.nextChoice < man.getPrefsList().length-1) {
 						man.nextChoice++;
 					}
 					else {
 						man.exhausted = true;
 						exhaustedCount++;
-						man.currentFiance = new Nobody();
+						man.setCurrentFiance(new Nobody());
 					}
 				}
 				
@@ -306,18 +306,18 @@ public class GaleShapley {
 				
 				ArrayList<Man> candidates = woman.proposals;
 				
-				if(woman.currentFiance.getClass() != Nobody.class) {
-					candidates.add((Man) woman.currentFiance);
+				if(woman.getCurrentFiance().getClass() != Nobody.class) {
+					candidates.add((Man) woman.getCurrentFiance());
 				}
 				
-				int mostPrefIndex = woman.prefsList.length;
+				int mostPrefIndex = woman.getPrefsList().length;
 				Person mostPref = null; // blank Person
 				
 				for(int k = 0; k < candidates.size(); k++ )
 				{
 					Man man = candidates.get(k);
-					for(int l = 0; l < woman.prefsList.length; l++) {
-						if(woman.prefsList[l] == man.id) {
+					for(int l = 0; l < woman.getPrefsList().length; l++) {
+						if(woman.getPrefsList()[l] == man.getId()) {
 							if(l < mostPrefIndex) {
 								mostPref = man;
 								mostPrefIndex = l;
@@ -327,17 +327,17 @@ public class GaleShapley {
 				}
 				
 				if(mostPref != null) {
-					if(woman.currentFiance.getClass() == Nobody.class) {
+					if(woman.getCurrentFiance().getClass() == Nobody.class) {
 						// accepting for the first time
 						engagedCount++;
-						woman.currentFiance = mostPref;
-						mostPref.currentFiance = woman;
+						woman.setCurrentFiance(mostPref);
+						mostPref.setCurrentFiance(woman);
 					}
-					else if(woman.currentFiance.getClass() != Nobody.class  && mostPref != woman.currentFiance) {
+					else if(woman.getCurrentFiance().getClass() != Nobody.class  && mostPref != woman.getCurrentFiance()) {
 						// rejecting current fiance and accepting a new one
-						woman.currentFiance.currentFiance = new Nobody();
-						woman.currentFiance = mostPref;
-						mostPref.currentFiance = woman;
+						woman.getCurrentFiance().setCurrentFiance(new Nobody());
+						woman.setCurrentFiance(mostPref);
+						mostPref.setCurrentFiance(woman);
 					}
 				}
 				
@@ -354,7 +354,7 @@ public class GaleShapley {
 			ArrayList<Person> matchRow = new ArrayList<Person>();
 			
 			matchRow.add(men[i]);
-			matchRow.add(men[i].currentFiance);
+			matchRow.add(men[i].getCurrentFiance());
 			
 			output.add(matchRow);
 		}

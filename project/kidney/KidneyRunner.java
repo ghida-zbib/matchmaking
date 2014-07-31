@@ -102,16 +102,16 @@ public class KidneyRunner {
 			
 			for(int i = 0; i < men.length; i++) {
 				System.out.println(String.format("%s preference list: ", men[i].getName()));
-				for(int j = 0; j < men[i].prefsList.length; j++) {
-					System.out.print(((Integer) men[i].prefsList[j]).toString() + " ");	
+				for(int j = 0; j < men[i].getPrefsList().length; j++) {
+					System.out.print(((Integer) men[i].getPrefsList()[j]).toString() + " ");	
 				}
 				System.out.print("\n");
 			}
 			
 			for(int i = 0; i < women.length; i++) {
 				System.out.println(String.format("%s preference list: ", women[i].getName()));
-				for(int j = 0; j < women[i].prefsList.length; j++) {
-					System.out.print(((Integer) women[i].prefsList[j]).toString() + " ");	
+				for(int j = 0; j < women[i].getPrefsList().length; j++) {
+					System.out.print(((Integer) women[i].getPrefsList()[j]).toString() + " ");	
 				}
 				System.out.print("\n");
 			}
