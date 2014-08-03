@@ -6,10 +6,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 
-
 public class KCIPerson {
-	private static double SCORE_THRESHOLD = 62.5;
-	
+	private static double SCORE_THRESHOLD = 20;
+
 	private int id;
 	
 	private String bloodType;
@@ -100,7 +99,7 @@ public class KCIPerson {
 	public Double weightedPref(KCIPerson person) {
 		int personHealthIndex = person.getHealthIndex();
 		int kidneyCompatibility = bloodCompatibility(this.bloodType, person.getBloodType());
-		Double weightedPreference = 0.6*kidneyCompatibility + 0.4*personHealthIndex;
+		Double weightedPreference = 0.6*kidneyCompatibility + personHealthIndex;
 		
 	//	System.out.println(String.format("%s's preference for %s is %f", this.getFormResponse().getName(), person.getFormResponse().getName(), weightedPreference));
 		
