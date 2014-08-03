@@ -81,11 +81,6 @@ void generateRandomTests(int t, int n) {
 			}
     		fprintf(outputFile, "\n");
 		}
-        //OUTPUT PREFERENCE LISTS (MEN THEN WOMEN ON SEPARATE LINE FOR SEPARATE GENDER)
-		//Men Preferences
-		fprintf(outputFile, "\n");
-        //Women Preferences
-        fprintf(outputFile, "\n");
     }
     //CLOSE FILES
     fclose(outputFile);

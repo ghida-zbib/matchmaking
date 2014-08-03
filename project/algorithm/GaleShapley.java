@@ -165,7 +165,7 @@ public class GaleShapley {
 	
 	public static List<List<List<Person>>> runFromFile() throws NumberFormatException, IOException {
 		long startTime = System.nanoTime();
-		File inputFile = new File("src/test/matchTests[5x5With2Tests.txt");
+		File inputFile = new File("src/test/matchTests[675x675With20Tests.txt");
 		FileReader inReader = new FileReader(inputFile);
 		BufferedReader buffReader = new BufferedReader(inReader);
 		
@@ -184,10 +184,10 @@ public class GaleShapley {
 		
 		for(int q = 0; q < t; q++) { 
 			
+			// System.out.println(String.format("now on test %d", q));
+			
 			List<Man> men = new ArrayList<Man>();
 			List<Woman> women = new ArrayList<Woman>();
-			
-			System.out.println(String.format("We are now on test %d", q));
 			
 			String menString = buffReader.readLine();
 			lineNumber++;
@@ -262,7 +262,7 @@ public class GaleShapley {
 		}
 		
 		long endTime = System.nanoTime();
-		System.out.println(String.format("Total test time for %d tests (%d x %d) took %f seconds", t, n, n, (endTime-startTime)/1000000000.0));
+		System.out.println(String.format("Total test time for %d tests (%d x %d) took %f seconds [%f seconds per test]", t, n, n, (endTime-startTime)/1000000000.0, ((endTime-startTime)/1000000000.0)/t));
 		
 		inReader.close();
 		
@@ -274,9 +274,6 @@ public class GaleShapley {
 		int exhaustedCount = 0;
 		
 		while(engagedCount + exhaustedCount < n) {
-			
-			System.out.println(String.format("engaged count: %d", engagedCount));
-			System.out.println(String.format("exhausted count: %d", exhaustedCount));
 			
 			for(int i = 0; i < men.length; i++) {
 				
@@ -396,8 +393,17 @@ public class GaleShapley {
 			System.out.println("Failed test - unstable");
 		} */
 		// displayFromIncompleteManual();
-		System.out.println(Verifier.verify(runFromFile().get(0)));
-		System.out.println(Verifier.verify(runFromFile().get(1)));
+		List<List<List<Person>>> results = runFromFile();
+		
+		boolean allGood = true;
+		
+		for(int i = 0; i < results.size(); i++) {
+			if(!Verifier.verify(results.get(i))) {
+				allGood = false;
+			}
+		}
+		
+		System.out.println(allGood);
 	}
 	
 }

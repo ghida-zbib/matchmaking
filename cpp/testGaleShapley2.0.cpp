@@ -91,11 +91,7 @@ void generateRandomTests(int t, int n, int incomplete) {
 			}
     		fprintf(outputFile, "\n");
 		}
-        //OUTPUT PREFERENCE LISTS (MEN THEN WOMEN ON SEPARATE LINE FOR SEPARATE GENDER)
-		//Men Preferences
-		fprintf(outputFile, "\n");
-        //Women Preferences
-        fprintf(outputFile, "\n");
+        //OUTPUT PREFERENCE LISTS (MEN THEN WOMEN ON SEPARATE LINE FOR SEPARATE GENDER
         iterations++;
      printf ("Completed Iteration [%d]\n", iterations);
 
