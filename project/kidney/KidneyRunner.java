@@ -100,7 +100,7 @@ public class KidneyRunner {
 			Man[] men = convertRecipients(recipients);
 			Woman[] women = convertDonors(donors);
 			
-			for(int i = 0; i < men.length; i++) {
+			/* for(int i = 0; i < men.length; i++) {
 				System.out.println(String.format("%s preference list: ", men[i].getName()));
 				for(int j = 0; j < men[i].getPrefsList().length; j++) {
 					System.out.print(((Integer) men[i].getPrefsList()[j]).toString() + " ");	
@@ -114,13 +114,21 @@ public class KidneyRunner {
 					System.out.print(((Integer) women[i].getPrefsList()[j]).toString() + " ");	
 				}
 				System.out.print("\n");
-			}
+			} */
 			
 			List<List<Person>> output = GaleShapley.galeShapley(men, women, men.length);
+			
+			int unmatchedCount = 0;
+			
 			for(int i = 0; i < output.size(); i++) {
 				List<Person> row = output.get(i);
-				System.out.println(row.get(0).getName() + " is matched with " + row.get(1).getName());
+				// System.out.println(row.get(0).getName() + " is matched with " + row.get(1).getName());
+				if(row.get(1).getName().equals("Nobody")) {
+					unmatchedCount += 2;
+					// TODO FIX OUTPUT TO HAVE TWO SIDES OF UNMATCHED RELATION
+				}
 			}
+			System.out.println(String.format("Unmatched: %d", unmatchedCount));
 		}
 		catch(FileNotFoundException e) {
 			e.printStackTrace();

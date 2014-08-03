@@ -278,34 +278,41 @@ public class GaleShapley {
 			for(int i = 0; i < men.length; i++) {
 				
 				Man man = men[i];
+				
+				if(man.getPrefsList().length > 0) {
+							
+					if(man.getCurrentFiance().getClass() == Nobody.class) {
 						
-				if(man.getCurrentFiance().getClass() == Nobody.class) {
+						/* propose to the next choice */
+						
+						Woman nextChoiceWoman = null; // blank Woman object
+						
+						for(int j = 0; j < women.length; j++) {
+							Woman woman = women[j];
+							int nextChoiceId = man.getPrefsList()[man.nextChoice];
+							if(woman.getId() == nextChoiceId) {
+								nextChoiceWoman = women[j];
+								break;
+							}
+						}
 					
-					/* propose to the next choice */
-					
-					Woman nextChoiceWoman = null; // blank Woman object
-					
-					for(int j = 0; j < women.length; j++) {
-						Woman woman = women[j];
-						int nextChoiceId = man.getPrefsList()[man.nextChoice];
-						if(woman.getId() == nextChoiceId) {
-							nextChoiceWoman = women[j];
-							break;
+						nextChoiceWoman.proposals.add(man);
+						assert man.nextChoice < n-1;
+						if(man.nextChoice < man.getPrefsList().length-1) {
+							man.nextChoice++;
+						}
+						else {
+							man.exhausted = true;
+							exhaustedCount++;
+							man.setCurrentFiance(new Nobody());
 						}
 					}
-				
-					nextChoiceWoman.proposals.add(man);
-					assert man.nextChoice < n-1;
-					if(man.nextChoice < man.getPrefsList().length-1) {
-						man.nextChoice++;
-					}
-					else {
-						man.exhausted = true;
-						exhaustedCount++;
-						man.setCurrentFiance(new Nobody());
-					}
 				}
-				
+			
+				else {
+					// continue
+					exhaustedCount++;
+				}
 			}
 			
 			for(int j = 0; j < women.length; j++) {

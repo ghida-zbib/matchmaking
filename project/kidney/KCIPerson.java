@@ -4,10 +4,11 @@ import project.forms.Response;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 
 
 public class KCIPerson {
-	private static int SCORE_THRESHOLD = 40;
+	private static double SCORE_THRESHOLD = 62.5;
 	
 	private int id;
 	
@@ -101,7 +102,7 @@ public class KCIPerson {
 		int kidneyCompatibility = bloodCompatibility(this.bloodType, person.getBloodType());
 		Double weightedPreference = 0.6*kidneyCompatibility + 0.4*personHealthIndex;
 		
-		System.out.println(String.format("%s's preference for %s is %f", this.getFormResponse().getName(), person.getFormResponse().getName(), weightedPreference));
+	//	System.out.println(String.format("%s's preference for %s is %f", this.getFormResponse().getName(), person.getFormResponse().getName(), weightedPreference));
 		
 		return weightedPreference;
 	}
@@ -128,12 +129,13 @@ public class KCIPerson {
 		
 		// filter out those who are under the threshold
 		
-		for(int i = 0; i < preferenceList.size(); i++) {
-			if(preferenceList.get(i) < SCORE_THRESHOLD) {
-				preferenceList.remove(i);
+		Iterator<Double> iter = preferenceList.iterator();
+		
+		while(iter.hasNext()) {
+			if(iter.next() < SCORE_THRESHOLD) {
+				iter.remove();
 			}
 		}
-		
 		
 		for(int i = 0; i < preferenceList.size(); i++) {
 			
