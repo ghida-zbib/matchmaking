@@ -99,7 +99,7 @@ public class KCIPerson {
 		int kidneyCompatibility = bloodCompatibility(this.bloodType, person.getBloodType());
 		Double weightedPreference = 0.6*kidneyCompatibility + 0.4*personHealthIndex;
 		
-		System.out.println(String.format("%s's preference for %s is %f", this.getFormResponse().getName(), person.getFormResponse().getName(), weightedPreference));
+		// System.out.println(String.format("%s's preference for %s is %f", this.getFormResponse().getName(), person.getFormResponse().getName(), weightedPreference));
 		
 		return weightedPreference;
 	}

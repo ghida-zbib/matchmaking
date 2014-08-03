@@ -57,13 +57,16 @@ public class ResponseSet {
 		while (scanner.hasNext())
 			{
 				if(currentResponse.size() < 8) {
-					currentResponse.add(scanner.next());
+					String nextResponse = scanner.next();
+					currentResponse.add(nextResponse);
 				}
 				else {
 					responseStrings.add(currentResponse);
 					currentResponse = new ArrayList<String>();
 				}
 			}
+		
+		responseStrings.add(currentResponse);
 
 			for(int i = 0; i < responseStrings.size(); i++) {
 				ArrayList<String> myResponse = responseStrings.get(i);
