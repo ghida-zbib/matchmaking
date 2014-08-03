@@ -99,8 +99,6 @@ public class ResponseSet {
 				String bloodTypeString = myResponse.get(6);
 				response.setBloodType(bloodTypeString);
 				
-				/* TODO: randomize the Unknown blood types */
-				
 				String name = myResponse.get(7);
 				response.setName(name);
 				

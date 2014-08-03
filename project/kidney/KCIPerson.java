@@ -7,6 +7,8 @@ import java.util.Collections;
 
 
 public class KCIPerson {
+	private static int SCORE_THRESHOLD = 40;
+	
 	private int id;
 	
 	private String bloodType;
@@ -99,7 +101,7 @@ public class KCIPerson {
 		int kidneyCompatibility = bloodCompatibility(this.bloodType, person.getBloodType());
 		Double weightedPreference = 0.6*kidneyCompatibility + 0.4*personHealthIndex;
 		
-		// System.out.println(String.format("%s's preference for %s is %f", this.getFormResponse().getName(), person.getFormResponse().getName(), weightedPreference));
+		System.out.println(String.format("%s's preference for %s is %f", this.getFormResponse().getName(), person.getFormResponse().getName(), weightedPreference));
 		
 		return weightedPreference;
 	}
@@ -123,6 +125,15 @@ public class KCIPerson {
 		// sort the list of preference numbers
 		
 		Collections.sort(preferenceList);
+		
+		// filter out those who are under the threshold
+		
+		for(int i = 0; i < preferenceList.size(); i++) {
+			if(preferenceList.get(i) < SCORE_THRESHOLD) {
+				preferenceList.remove(i);
+			}
+		}
+		
 		
 		for(int i = 0; i < preferenceList.size(); i++) {
 			
