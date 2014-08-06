@@ -6,8 +6,10 @@ import project.algorithm.Person;
 import project.forms.ResponseSet;
 import project.algorithm.Woman;
 import project.forms.Response;
+import project.test.Verifier;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +68,7 @@ public class KidneyRunner {
 		return lists;
 	}
 	
-	public void runFromCSV(String filename) {
+	public void runFromCSV(String filename) throws IOException {
 		int highestId = 1;
 		ArrayList<KCIPerson> people = new ArrayList<KCIPerson>();
 		
@@ -122,13 +124,16 @@ public class KidneyRunner {
 			
 			for(int i = 0; i < output.size(); i++) {
 				List<Person> row = output.get(i);
-				// System.out.println(row.get(0).getName() + " is matched with " + row.get(1).getName());
-				if(row.get(1).getName().equals("Nobody")) {
+				System.out.println(row.get(0).getName() + " is matched with " + row.get(1).getName());
+				if(row.get(1).getName().equals("Nobody") || row.get(0).getName().equals("Nobody")) {
 					unmatchedCount += 2;
 					// TODO FIX OUTPUT TO HAVE TWO SIDES OF UNMATCHED RELATION
 				}
 			}
 			System.out.println(String.format("Unmatched: %d", unmatchedCount));
+			if(Verifier.verify(output)) {
+				System.out.println("hurray!");
+			}
 		}
 		catch(FileNotFoundException e) {
 			e.printStackTrace();
@@ -137,6 +142,11 @@ public class KidneyRunner {
 	
 	public static void main(String[] args) {
 		KidneyRunner kr = new KidneyRunner();
-		kr.runFromCSV("/Users/dev/finalResults.csv");
+		try {
+			kr.runFromCSV("/Users/dev/finalResults.csv");
+		}
+		catch(IOException e) {
+			//...
+		}
 	}
 }

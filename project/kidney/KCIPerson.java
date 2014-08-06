@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public class KCIPerson {
-	private static double SCORE_THRESHOLD = 20;
+	private static double SCORE_THRESHOLD = 3;
 
 	private int id;
 	
@@ -125,6 +125,7 @@ public class KCIPerson {
 		// sort the list of preference numbers
 		
 		Collections.sort(preferenceList);
+		Collections.reverse(preferenceList);
 		
 		// filter out those who are under the threshold
 		
