@@ -165,7 +165,7 @@ public class GaleShapley {
 	
 	public static List<List<List<Person>>> runFromFile() throws NumberFormatException, IOException {
 		long startTime = System.nanoTime();
-		File inputFile = new File("src/test/matchTests[100x100With10Tests.txt");
+		File inputFile = new File("src/test/matchTests[371x371With7Tests.txt");
 		FileReader inReader = new FileReader(inputFile);
 		BufferedReader buffReader = new BufferedReader(inReader);
 		

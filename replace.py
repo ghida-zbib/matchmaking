@@ -1,4 +1,5 @@
 import re
+import sys
 
 def replace(n, t):
 	f = open('project/algorithm/GaleShapley.java', 'r')
@@ -11,4 +12,4 @@ def replace(n, t):
 	f.write(contents)
 	f.close()
 
-replace(100, 10)
+replace(int(sys.argv[1]), int(sys.argv[2]))
