@@ -6,8 +6,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 
+/**
+ * @author dev
+ *
+ */
 public class KCIPerson {
-	private static double SCORE_THRESHOLD = 3;
+	private static double SCORE_THRESHOLD = 18;
 
 	private int id;
 	

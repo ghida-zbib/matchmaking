@@ -165,7 +165,7 @@ public class GaleShapley {
 	
 	public static List<List<List<Person>>> runFromFile() throws NumberFormatException, IOException {
 		long startTime = System.nanoTime();
-		File inputFile = new File("src/test/matchTests[675x675With20Tests.txt");
+		File inputFile = new File("src/test/matchTests[100x100With10Tests.txt");
 		FileReader inReader = new FileReader(inputFile);
 		BufferedReader buffReader = new BufferedReader(inReader);
 		
@@ -182,14 +182,21 @@ public class GaleShapley {
 		lineNumber++;
 		lineNumber++;
 		
-		for(int q = 0; q < t; q++) { 
+		for(int q = 0; q < t; q++) {
+		
 			
 			// System.out.println(String.format("now on test %d", q));
 			
 			List<Man> men = new ArrayList<Man>();
 			List<Woman> women = new ArrayList<Woman>();
 			
-			String menString = buffReader.readLine();
+			String line;
+			
+			while((line = buffReader.readLine()).equals("")) {
+				// ...
+			}
+			
+			String menString = line;
 			lineNumber++;
 			String[] menStringArray = menString.split(" ");
 			
@@ -274,6 +281,10 @@ public class GaleShapley {
 		int exhaustedCount = 0;
 		
 		while(engagedCount + exhaustedCount < n) {
+			
+			/* if(engagedCount != 1) {
+				System.out.println(String.format("engaged count: %d", engagedCount));
+			} */
 			
 			for(int i = 0; i < men.length; i++) {
 				
