@@ -416,12 +416,23 @@ public class GaleShapley {
 		boolean allGood = true;
 		
 		for(int i = 0; i < results.size(); i++) {
+			System.out.println(String.format("Test #%d results:", i+1));
+			for(int j = 0; j < results.get(i).size(); j++) {
+				List<Person> resultRow = results.get(i).get(j);
+				System.out.println(String.format("Man %d is matched with Woman %d", resultRow.get(0).getId(), resultRow.get(1).getId()));
+			}
 			if(!Verifier.verify(results.get(i))) {
 				allGood = false;
+				System.out.println(String.format("There was an blocking pair in test #%d.", i+1));
 			}
 		}
 		
-		System.out.println(allGood);
+		if(allGood) {
+			System.out.println("All matches are stable.");
+		}
+		else {
+			System.out.println("Not all matches are stable - see above for errors.");
+		}
 	}
 	
 }
